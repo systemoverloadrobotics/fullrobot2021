@@ -27,7 +27,7 @@ public final class CONSTANTS {
 
     public static final class CONTROLS {
         public static final int JOYSTICK_PORT = 0;
-        public static final byte ARCADE_JOYSTICK_PORT = 1;
+        public static final int ARCADE_JOYSTICK_PORT = 1;
 
         public static final class JOYSTICK {
             public static final int TRIGGER = 1;  // BUTTON
