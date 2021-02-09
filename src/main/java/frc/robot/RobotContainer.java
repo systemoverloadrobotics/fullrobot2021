@@ -24,8 +24,8 @@ import frc.robot.CONSTANTS.*;
 public class RobotContainer {
 
   //Controllers
-  private final Joystick m_joystick = new Joystick(CONTROLS.JOYSTICK_PORT);
-	private final Joystick arcade_joystick = new Joystick(CONTROLS.ARCADE_JOYSTICK_PORT);
+  private final Joystick movement_Joystick = new Joystick(CONTROLS.JOYSTICK_PORT);
+	private final Joystick arcade_Joystick = new Joystick(CONTROLS.ARCADE_JOYSTICK_PORT);
 
   //Subsystems
   private final DriveTrain m_driveTrain = new DriveTrain(null);
@@ -36,10 +36,10 @@ public class RobotContainer {
   private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
 
   private final ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_driveTrain,
-			() -> m_joystick.getY(),
-			() -> m_joystick.getX(),
-			() -> m_joystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
-			() -> m_joystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER));
+			() -> movement_Joystick.getY(),
+			() -> movement_Joystick.getX(),
+			() -> movement_Joystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
+			() -> movement_Joystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER));
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
