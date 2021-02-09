@@ -25,28 +25,6 @@ public final class CONSTANTS {
         public static final double TURN_MULTIPLIER = 0.4;
     }
 
-    public static final class CLIMB {
-        public static final int ELEVATOR_ID = 13;
-        public static final int WINCH_ID = 15;
-        public static final double ELEVATOR_UP_SPEED = -0.3;
-        public static final double ELEVATOR_DOWN_SPEED = 0.1;
-        public static final double WINCH_POWER_CONSTANT = 0.3;
-        public static final double REVERSE_WINCH_POWER_CONSTANT = -0.3;
-    }
-
-    public static final class INTAKE {
-        public static final int FORWARD_CHANNEL_ID = 5;
-        public static final int REVERSE_CHANNEL_ID = 4;
-        public static final int INTAKE_ID = 10;
-        public static final double INWARD = -.35;
-        public static final double OUTWARD = .5;
-
-    }
-
-    public static final class OUTTAKE {
-        public static final int OUTTAKE_WHEELS_ID = 14;
-    }
-
     public static final class CONTROLS {
         public static final int JOYSTICK_PORT = 0;
         public static final byte ARCADE_JOYSTICK_PORT = 1;
