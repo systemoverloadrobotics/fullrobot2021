@@ -25,15 +25,6 @@ public final class CONSTANTS {
         public static final double TURN_MULTIPLIER = 0.4;
     }
 
-    public static final class STORAGE {
-        public static final int BALLS_INTAKE_SWITCH_ID = 0;
-        public static final int BALLS_IN_SWITCH_ID = 1;
-        public static final int BALLS_OUT_SWITCH_ID = 2;
-        public static final int POLYCORD_MOTOR_ID = 11;
-        public static final double POLYCORD_FORWARD_SPEED = .3;
-        public static final double POLYCORD_REVERSE_SPEED = -.2;
-    }
-
     public static final class CLIMB {
         public static final int ELEVATOR_ID = 13;
         public static final int WINCH_ID = 15;
