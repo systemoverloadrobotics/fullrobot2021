@@ -36,12 +36,8 @@ public class DriveTrain extends SubsystemBase {
 
     public DifferentialDrive robotDrive = new DifferentialDrive(leftGroup, rightGroup);
 
-    BooleanSupplier m_align;
 
-
-    public DriveTrain(BooleanSupplier align) {
-        m_align = align;
-
+    public DriveTrain() {
         rightMaster.restoreFactoryDefaults();
         rightFollower1.restoreFactoryDefaults();
         rightFollower2.restoreFactoryDefaults();

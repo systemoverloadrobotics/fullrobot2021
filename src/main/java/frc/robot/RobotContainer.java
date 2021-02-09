@@ -28,7 +28,7 @@ public class RobotContainer {
 	private final Joystick arcade_Joystick = new Joystick(CONTROLS.ARCADE_JOYSTICK_PORT);
 
   //Subsystems
-  private final DriveTrain m_driveTrain = new DriveTrain(null);
+  private final DriveTrain m_driveTrain = new DriveTrain();
 
   // The robot's subsystems and commands are defined here...
   private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
