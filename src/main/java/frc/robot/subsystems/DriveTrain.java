@@ -53,12 +53,10 @@ public class DriveTrain extends SubsystemBase {
 
     //Pushes the solenoid forward
     public void shiftUp() {
-        System.out.println("Down");
         shifter.set(Value.kForward);
     }
     //Pushes the solenoid backward
     public void shiftDown() {
-        System.out.println("Up");
         shifter.set(Value.kReverse);
     }
 
