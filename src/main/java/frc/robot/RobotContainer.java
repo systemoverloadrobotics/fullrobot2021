@@ -24,22 +24,17 @@ import frc.robot.CONSTANTS.*;
 public class RobotContainer {
 
   //Controllers
-  private final Joystick movement_Joystick = new Joystick(CONTROLS.JOYSTICK_PORT);
-	private final Joystick arcade_Joystick = new Joystick(CONTROLS.ARCADE_JOYSTICK_PORT);
+  private final Joystick movementJoystick = new Joystick(CONTROLS.JOYSTICK_PORT);
+	private final Joystick arcadeJoystick = new Joystick(CONTROLS.ARCADE_JOYSTICK_PORT);
 
   //Subsystems
-  private final DriveTrain m_driveTrain = new DriveTrain();
-
-  // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
-
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
-
-  private final ArcadeDrive m_arcadeDrive = new ArcadeDrive(m_driveTrain,
-			() -> movement_Joystick.getY(),
-			() -> movement_Joystick.getX(),
-			() -> movement_Joystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
-			() -> movement_Joystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER));
+  private final DriveTrain driveTrain = new DriveTrain();
+  //Commands
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain,
+			() -> movementJoystick.getY(),
+			() -> movementJoystick.getX(),
+			() -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
+			() -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER));
 
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
@@ -47,7 +42,7 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
 
-    m_driveTrain.setDefaultCommand(m_arcadeDrive);
+    driveTrain.setDefaultCommand(arcadeDrive);
 
     configureButtonBindings();
   }
@@ -69,6 +64,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
 }
