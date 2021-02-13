@@ -19,9 +19,16 @@ public class Outtake extends SubsystemBase{
     NetworkTableEntry ty = networkTable.getEntry("ty"); //Vertical Offset From Crosshair To Target (-20.5 degrees to 20.5 degrees)
     NetworkTableEntry ta = networkTable.getEntry("ta"); //Target Area (0% of image to 100% of image)
 
+
     double x = tx.getDouble(0.0);
     double y = ty.getDouble(0.0);
     double area = ta.getDouble(0.0);
-    
+
+
+    public void periodic(){
+        x = tx.getDouble(0.0);
+        y = ty.getDouble(0.0);
+        area = ta.getDouble(0.0);
+    }
 
 }
