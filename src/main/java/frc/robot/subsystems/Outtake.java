@@ -20,9 +20,9 @@ public class Outtake extends SubsystemBase{
     NetworkTableEntry ta = networkTable.getEntry("ta"); //Target Area (0% of image to 100% of image)
 
 
-    double x = tx.getDouble(0.0);
-    double y = ty.getDouble(0.0);
-    double area = ta.getDouble(0.0);
+    public double x = tx.getDouble(0.0); 
+    public double y = ty.getDouble(0.0); 
+    public double area = ta.getDouble(0.0);
 
 
     public void periodic(){
