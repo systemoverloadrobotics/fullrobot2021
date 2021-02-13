@@ -7,9 +7,10 @@ import edu.wpi.first.networktables.NetworkTableInstance;
 
 public class Outtake extends SubsystemBase{
 
+    public LimelightManager limelightManager;
 
     public Outtake(){
-
+        limelightManager = new LimelightManager(x, y, area);
     }
 
 
@@ -30,5 +31,6 @@ public class Outtake extends SubsystemBase{
         y = ty.getDouble(0.0);
         area = ta.getDouble(0.0);
     }
+
 
 }

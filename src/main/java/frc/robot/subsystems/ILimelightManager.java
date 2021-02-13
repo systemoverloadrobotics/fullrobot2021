@@ -13,7 +13,6 @@ public interface ILimelightManager {
     public double setA();
 
 
-
     public void ConvertPixelsToAngles();
 
 }
