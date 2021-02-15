@@ -19,6 +19,7 @@ public class GeneratePath {
     private Trajectory trajectory; 
 
     public GeneratePath(){       
+
     }
 
     public void doPath(int which){
@@ -32,7 +33,7 @@ public class GeneratePath {
                             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
                             trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
                         } catch (IOException ex) {  
-                        DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
+                            DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
                         }
                     }     
                     break;
@@ -58,11 +59,11 @@ public class GeneratePath {
                         }
                     }
                     break;
-                default:
-                    break;
+                
             }            
+        }else{
+            System.out.println("invalid path index");
         }
-    }   
-        
+    }           
 
 }
