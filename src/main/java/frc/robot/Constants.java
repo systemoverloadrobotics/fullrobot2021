@@ -6,10 +6,47 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot;
 
-public final class CONSTANTS {
+import edu.wpi.first.wpilibj.DigitalSource;
+import edu.wpi.first.wpilibj.kinematics.*;
+
+public final class Constants {
 
     //General Constants
-    public static final int PCM_ID = 3;
+    public static final int PCM_ID = 10;
+	public static final int kLeftMotor1Port = 11;
+	public static final int kLeftMotor2Port = 12;
+	public static final int kRightMotor1Port = 13;
+	public static final int kRightMotor2Port = 14;
+	//public static final DigitalSource[] kLeftEncoderPorts = new DigitalSource[]{,null};
+	//public static final DigitalSource kLeftEncoderReversed = null;
+	//public static final DigitalSource[] kRightEncoderPorts = new DigitalSource[]{null,null};
+	//public static final DigitalSource kRightEncoderReversed = null;
+    public static final double kEncoderDistancePerPulse = 5;
+    
+    public static final class SIMULATION {
+        // These are example values only - DO NOT USE THESE FOR YOUR OWN ROBOT!
+        // These characterization values MUST be determined either experimentally or theoretically
+        // for *your* robot's drive.
+        // The Robot Characterization Toolsuite provides a convenient tool for obtaining these
+        // values for your robot.
+        public static final double ksVolts = 0.22;
+        public static final double kvVoltSecondsPerMeter = 1.98;
+        public static final double kaVoltSecondsSquaredPerMeter = 0.2;
+
+        // Example value only - as above, this must be tuned for your drive!
+        public static final double kPDriveVel = 8.5;
+
+        public static final double kTrackwidthMeters = 0.69;
+        public static final DifferentialDriveKinematics kDriveKinematics = new DifferentialDriveKinematics(kTrackwidthMeters);
+
+        public static final double kMaxSpeedMetersPerSecond = 3;
+        public static final double kMaxAccelerationMetersPerSecondSquared = 3;
+
+        // Reasonable baseline values for a RAMSETE follower in units of meters and seconds
+        public static final double kRamseteB = 2;
+        public static final double kRamseteZeta = 0.7;
+    
+    }
 
     // Subsystem Constants
     public static final class DRIVE {

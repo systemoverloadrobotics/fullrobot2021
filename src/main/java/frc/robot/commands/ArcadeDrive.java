@@ -24,18 +24,18 @@ public class ArcadeDrive extends CommandBase {
 
     @Override
     public void execute() {
-        m_driveTrain.driveArcade(m_speed.getAsDouble(), m_turn.getAsDouble());
+        //m_driveTrain.driveArcade(m_speed.getAsDouble(), m_turn.getAsDouble());
 
-        if (m_shiftDown.getAsBoolean()) {
+        /*if (m_shiftDown.getAsBoolean()) {
             m_driveTrain.shiftDown();
         } else if (m_shiftUp.getAsBoolean()) {
             m_driveTrain.shiftUp();
-        }
+        }*/
     }
 
     @Override
     public void end(boolean interrupted) {
-        m_driveTrain.driveArcade(0, 0);
+        //m_driveTrain.driveArcade(0, 0);
     }
 
     @Override
