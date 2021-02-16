@@ -159,7 +159,8 @@ public class DriveTrain extends SubsystemBase {
         // Update the odometry in the periodic block
         m_odometry.update(m_gyro.getRotation2d(), m_leftEncoder.getDistance(),
                   m_rightEncoder.getDistance());
-        m_field.setRobotPose(m_odometry.getPoseMeters());          
+        m_field.setRobotPose(m_odometry.getPoseMeters());   
+        System.out.println("x:" + m_odometry.getPoseMeters().getX() + " y:" + m_odometry.getPoseMeters().getY());       
     }
 
     /**
@@ -207,8 +208,9 @@ public class DriveTrain extends SubsystemBase {
     * @param rightVolts the commanded right output
     */
     public void tankDriveVolts(double leftVolts, double rightVolts) {
+        //System.out.println("x:" + leftVolts + " y:" + rightVolts);
         m_leftMotors.setVoltage(leftVolts);
-        m_rightMotors.setVoltage(-rightVolts);
+        m_rightMotors.setVoltage(rightVolts);
         m_drive.feed();
     }
 
