@@ -210,7 +210,7 @@ public class DriveTrain extends SubsystemBase {
     public void tankDriveVolts(double leftVolts, double rightVolts) {
         //System.out.println("x:" + leftVolts + " y:" + rightVolts);
         m_leftMotors.setVoltage(leftVolts);
-        m_rightMotors.setVoltage(rightVolts);
+        m_rightMotors.setVoltage(-rightVolts);
         m_drive.feed();
     }
 
@@ -288,7 +288,7 @@ public class DriveTrain extends SubsystemBase {
         // the [-1, 1] PWM signal to voltage by multiplying it by the
         // robot controller voltage.
         m_driveSim.setInputs(m_leftMotors.get() * RobotController.getInputVoltage(),
-                             m_rightMotors.get() * RobotController.getInputVoltage());
+                             -m_rightMotors.get() * RobotController.getInputVoltage());
       
         // Advance the model by 20 ms. Note that if you are running this
         // subsystem in a separate thread or have changed the nominal timestep
