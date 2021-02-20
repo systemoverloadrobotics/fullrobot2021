@@ -11,6 +11,11 @@ public final class CONSTANTS {
     //General Constants
     public static final int PCM_ID = 3;
 
+    //PID
+    public static final int kPIDLoopIdx = 0;
+    public static final int kTimeoutMs = 30;
+
+
     // Subsystem Constants
     public static final class DRIVE {
         public static final int FORWARD_CHANNEL_ID = 2;
