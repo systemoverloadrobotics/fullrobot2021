@@ -13,18 +13,20 @@ public final class CONSTANTS {
     public static final int PCM_ID = 3;
 
    
-    public static final int kTimeoutMs = 30;
+    public static final int TIMEOUT_MS = 30;
     /**
 	 * Motor neutral dead-band, set to the minimum 0.1%.
 	 */
-    public static final double kNeutralDeadband = 0.001;
+    public static final double NEUTRAL_DEADBAND = 0.001;
     
     //Gains
-    public static final int kPIDLoopIdx = 0;
+    public static final int TALON_PRIMARY_CLOSED_LOOP = 0;
 
     //Turret Constants
-    public static final int turretEncoderLeftSoftLimit = 85; //TODO Reminder: soft limit should become 85 when safe
-    public static final int turretEncoderRightSoftLimit = -85;
+    public static final int turretEncoderLeftSoftLimit = 85; //degree of freedom, if not met seeking will be required
+    public static final int turretEncoderRightSoftLimit = -85; //degree of freedom, if not met seeking will be required
+
+    public static final int TURRET_PORT = 0;
 
     
 
