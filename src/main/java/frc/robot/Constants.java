@@ -18,6 +18,7 @@ public final class CONSTANTS {
 	 * Motor neutral dead-band, set to the minimum 0.1%.
 	 */
     public static final double NEUTRAL_DEADBAND = 0.001;
+    public static final int kUnitsPerRevolution = 2048; /* this is constant for Talon FX */
     
     //Gains
     public static final int TALON_PRIMARY_CLOSED_LOOP = 0;
@@ -27,6 +28,12 @@ public final class CONSTANTS {
     public static final int turretEncoderRightSoftLimit = -85; //degree of freedom, if not met seeking will be required
 
     public static final int TURRET_PORT = 0;
+
+    public static final double P_TURRET = 0.1;
+    public static final double I_TURRET = 0.0;
+    public static final double D_TURRET = 0.0;
+    public static final double F_TURRET = 0.0;
+    public static final double IZONE_TURRET = 100;
 
     
 

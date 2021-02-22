@@ -17,7 +17,7 @@ import frc.robot.CONSTANTS;
 
 public class Shooter extends SubsystemBase {
 
-    final int kUnitsPerRevolution = 2048; /* this is constant for Talon FX */
+    
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private double motorSetPoint;
     private int NumberOfBallsFired = 0;
@@ -78,10 +78,14 @@ public class Shooter extends SubsystemBase {
         return shooter.getSelectedSensorVelocity();
     }
 
-    public void set(int rpm) {
+    public void set(double rpm) {
         if (isActive()) {
             spin(rpm);
         }
+    }
+
+    public boolean shooterAtSetpoint(){
+        return shooter.getSelectedSensorVelocity() == motorSetPoint - CONSTANTS.NEUTRAL_DEADBAND;
     }
 
     public void stop() {

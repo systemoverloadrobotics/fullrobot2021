@@ -9,15 +9,7 @@ import frc.robot.CONSTANTS;
 
 public class Turret extends SubsystemBase {
 
-    final int kUnitsPerRevolution = 2048; /* this is constant for Talon FX */
-
-    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later
-
-    double turretP = 0.1;
-    double turretI = 0.0;
-    double turretD = 0.0;
-    double turretF = 0.0;
-    double turretIzone = 100;
+    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later    
 
     public Turret() {
 
@@ -26,11 +18,11 @@ public class Turret extends SubsystemBase {
         turret.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
         // PID
-        turret.config_kF(CONSTANTS.TURRET_PORT, turretF);
-        turret.config_kP(CONSTANTS.TURRET_PORT, turretP);
-        turret.config_kI(CONSTANTS.TURRET_PORT, turretI);
-        turret.config_kD(CONSTANTS.TURRET_PORT, turretD);
-        turret.config_IntegralZone(CONSTANTS.TURRET_PORT, turretIzone);
+        turret.config_kF(CONSTANTS.TURRET_PORT, CONSTANTS.F_TURRET);
+        turret.config_kP(CONSTANTS.TURRET_PORT, CONSTANTS.P_TURRET);
+        turret.config_kI(CONSTANTS.TURRET_PORT, CONSTANTS.I_TURRET);
+        turret.config_kD(CONSTANTS.TURRET_PORT, CONSTANTS.D_TURRET);
+        turret.config_IntegralZone(CONSTANTS.TURRET_PORT, CONSTANTS.IZONE_TURRET);
 
     }
 
