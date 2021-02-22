@@ -18,23 +18,12 @@ public class Turret extends SubsystemBase {
         turret.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
         // PID
-        turret.config_kF(CONSTANTS.TURRET_PORT, CONSTANTS.F_TURRET);
-        turret.config_kP(CONSTANTS.TURRET_PORT, CONSTANTS.P_TURRET);
-        turret.config_kI(CONSTANTS.TURRET_PORT, CONSTANTS.I_TURRET);
-        turret.config_kD(CONSTANTS.TURRET_PORT, CONSTANTS.D_TURRET);
-        turret.config_IntegralZone(CONSTANTS.TURRET_PORT, CONSTANTS.IZONE_TURRET);
+        turret.config_kF(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.F_TURRET);
+        turret.config_kP(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.P_TURRET);
+        turret.config_kI(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.I_TURRET);
+        turret.config_kD(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.D_TURRET);
+        turret.config_IntegralZone(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.IZONE_TURRET);
 
-    }
-
-    /**
-     * Moves the turret to an angle
-     * 
-     * @param position to move turret to
-     */
-    public void aim(double position) {
-        if (position <= CONSTANTS.turretEncoderLeftSoftLimit && position >= CONSTANTS.turretEncoderRightSoftLimit) {
-            // figure something out here
-        }
     }
 
     public double getVel() {
