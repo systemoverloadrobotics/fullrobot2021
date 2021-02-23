@@ -30,6 +30,10 @@ public class Turret extends SubsystemBase {
 
     }
 
+    public void aim(){
+        
+    }
+
     public double getVel() {
         return turret.getSelectedSensorVelocity();
     }
