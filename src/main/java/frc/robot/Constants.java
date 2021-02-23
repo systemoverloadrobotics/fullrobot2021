@@ -34,6 +34,9 @@ public final class CONSTANTS {
     public static final double F_TURRET = 0.0;
     public static final double IZONE_TURRET = 100;
 
+    //Shooter Constants
+    public static final double SHOOTER_DEADBAND = 0.02;
+
     
 
 
