@@ -24,8 +24,7 @@ public final class CONSTANTS {
     public static final int TALON_PRIMARY_CLOSED_LOOP = 0;
 
     //Turret Constants
-    public static final int TURRET_ENCODE_LEFT_LIMIT = 85; //degree of freedom, if not met seeking will be required
-    public static final int TURRET_ENCODE_RIGHT_LIMIT= -85; //degree of freedom, if not met seeking will be required
+    public static final int TURRET_ENCODER_LIMIT = 85; //degree of freedom, if not met seeking will be required
 
     public static final int TURRET_PID_SLOT = 0;
 
