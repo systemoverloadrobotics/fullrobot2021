@@ -6,10 +6,39 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot;
 
+
 public final class CONSTANTS {
 
     //General Constants
     public static final int PCM_ID = 3;
+
+   
+    public static final int TIMEOUT_MS = 30;
+    /**
+	 * Motor neutral dead-band, set to the minimum 0.1%.
+	 */
+    public static final double NEUTRAL_DEADBAND = 0.05;
+    public static final int UNITS_PER_REVOLUTION = 2048; /* this is constant for Talon FX */
+    
+    //Gains
+    public static final int TALON_PRIMARY_CLOSED_LOOP = 0;
+
+    //Turret Constants
+    public static final int TURRET_ENCODER_LIMIT = 85; //degree of freedom, if not met seeking will be required
+
+    public static final int TURRET_PID_SLOT = 0;
+
+    public static final double P_TURRET = 0.1;
+    public static final double I_TURRET = 0.0;
+    public static final double D_TURRET = 0.0;
+    public static final double F_TURRET = 0.0;
+    public static final double IZONE_TURRET = 100;
+
+    //Shooter Constants
+    public static final double SHOOTER_DEADBAND = 0.02;
+
+    
+
 
     // Subsystem Constants
     public static final class DRIVE {
