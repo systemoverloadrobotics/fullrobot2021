@@ -29,7 +29,6 @@ public class Turret extends SubsystemBase {
         //Soft Limit
         turret.configForwardSoftLimitEnable(true, CONSTANTS.TURRET_ENCODER_LIMIT);
 
-
     }
 
     public void aim(){
@@ -43,6 +42,11 @@ public class Turret extends SubsystemBase {
 
     public void stop() {
         turret.stopMotor();
+    }
+
+
+    public static double map(double x, double inputMin, double inputMax, double outputMin, double outputMax) {
+        return ((outputMax - outputMin) / (inputMax - inputMin)) * (x - inputMin) + outputMin;
     }
 
     @Override
