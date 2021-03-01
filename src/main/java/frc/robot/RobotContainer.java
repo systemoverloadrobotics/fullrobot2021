@@ -10,6 +10,9 @@ import frc.robot.commands.ArcadeDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Limelight;
+import frc.robot.subsystems.Shooter;
+import frc.robot.subsystems.Turret;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -29,6 +32,10 @@ public class RobotContainer {
 
   //Subsystems
   private final DriveTrain driveTrain = new DriveTrain();
+  public static final Turret turret = new Turret();
+  public static final Shooter shooter = new Shooter();
+  public static final Limelight limelight = new Limelight();
+
   //Commands
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain,
 			() -> movementJoystick.getY(),

@@ -7,11 +7,13 @@ import edu.wpi.first.wpilibj.controller.*;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.CONSTANTS;
+import frc.robot.RobotContainer;
 
 public class Turret extends SubsystemBase {
 
     private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later
     private PIDController pid = new PIDController(CONSTANTS.KP, CONSTANTS.KI, CONSTANTS.KD); //change these constants as needed;  
+
 
     public Turret() {
 
@@ -56,8 +58,16 @@ public class Turret extends SubsystemBase {
         turret.setSelectedSensorPosition(0);
     }
 
+    public boolean found(){
+        return RobotContainer.limelight.canSeeTarget() && RobotContainer.limelight.getTargetArea() > 0.8;
+    }
+
+    public boolean onTarget(){
+        return found() && RobotContainer.limelight.getHorizontalAngle() < 1.5;
+    }
+
     public double encoderToAngle(double encoder){
-        return map(encoder, 0, 2*CONSTANTS.TURRET_ENCODER_LIMIT , -CONSTANTS.TURRET_ENCODER_LIMIT, CONSTANTS.TURRET_ENCODER_LIMIT);
+        return map(encoder, 0, 2 * CONSTANTS.TURRET_ENCODER_LIMIT/360 , -CONSTANTS.TURRET_ENCODER_LIMIT, CONSTANTS.TURRET_ENCODER_LIMIT);
     }
 
     //math I found online
@@ -68,6 +78,7 @@ public class Turret extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+
     }
 
 }

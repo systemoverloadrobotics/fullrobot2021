@@ -50,6 +50,11 @@ public class Limelight extends SubsystemBase {
     public boolean canSeeTarget() {
         return targetEntry.getNumber(0).intValue() > 0;
     }
+
+    //returns the size of the target
+    public double getTargetArea(){
+        return ta.getNumber(0).doubleValue();
+    }
     
 
     public void periodic() {
