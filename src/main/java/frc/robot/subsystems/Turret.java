@@ -31,8 +31,12 @@ public class Turret extends SubsystemBase {
 
     }
 
-    public void aim(){
-        
+    public void set(double power){
+        turret.set(ControlMode.PercentOutput, power);
+    }
+
+    public void aim(double angle){
+        turret.set(ControlMode.Position, encoderToAngle(angle));
     }
 
     public double getVel() {
@@ -42,9 +46,21 @@ public class Turret extends SubsystemBase {
 
     public void stop() {
         turret.stopMotor();
+    }   
+
+    public void setPos(int position){
+        turret.setSelectedSensorPosition(position);
     }
 
+    public void home(){
+        turret.setSelectedSensorPosition(0);
+    }
 
+    public double encoderToAngle(double encoder){
+        return map(encoder, 0, 2*CONSTANTS.TURRET_ENCODER_LIMIT , -CONSTANTS.TURRET_ENCODER_LIMIT, CONSTANTS.TURRET_ENCODER_LIMIT);
+    }
+
+    //math I found online
     public static double map(double x, double inputMin, double inputMax, double outputMin, double outputMax) {
         return ((outputMax - outputMin) / (inputMax - inputMin)) * (x - inputMin) + outputMin;
     }
