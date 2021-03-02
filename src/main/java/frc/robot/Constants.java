@@ -37,6 +37,8 @@ public final class CONSTANTS {
 
     //Shooter Constants
     public static final double SHOOTER_DEADBAND = 0.02;
+    public static final double SHOOTER_ANGLE = 26.5;//in degrees
+    public static final double GRAVITY = -9.8;// in m/s^2
 
 <<<<<<< HEAD
     //PID Constnats
@@ -45,9 +47,9 @@ public final class CONSTANTS {
     public static final double KD = 0;
 =======
     //Limelight Constants
-    public static final double MOUNTED_ANGLE = 26.5;
+    public static final double MOUNTED_ANGLE = 26.5;//in degrees
     public static final double PORT_HEIGHT = Units.inchesToMeters(98.25);
-    public static final double HEIGHT_ABOVE_GROUND = 30;//tbd
+    public static final double HEIGHT_ABOVE_GROUND = 30;//tbd in meter also
   
 
     

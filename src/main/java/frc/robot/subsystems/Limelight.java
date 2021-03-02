@@ -32,7 +32,9 @@ public class Limelight extends SubsystemBase {
 
     }
 
-    /** @return a horizontal angle from -27 to 27 between the target and the camera */
+    /**
+     * @return a horizontal angle from -27 to 27 between the target and the camera
+     */
     public double getHorizontalAngle() {
         return horizontalAngleOffSet.getDouble(0);
     }
@@ -43,7 +45,7 @@ public class Limelight extends SubsystemBase {
     }
 
     /** @return If the limelight is connected */
-    public boolean connected(){
+    public boolean connected() {
         return networkTable.getEntry("tx").exists();
     }
 
@@ -52,15 +54,15 @@ public class Limelight extends SubsystemBase {
         return targetEntry.getNumber(0).intValue() > 0;
     }
 
-    //returns the size of the target
-    public double getTargetArea(){
+    // returns the size of the target
+    public double getTargetArea() {
         return ta.getNumber(0).doubleValue();
     }
 
-    public double calculateDistance(double verticalAngleOffSet){
-        return (CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND)/ Math.tan(verticalAngleOffSet + CONSTANTS.MOUNTED_ANGLE);
+    public double calculateDistance(double verticalAngleOffSet) {
+        return (CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND)
+                / Math.tan(Math.toRadians(verticalAngleOffSet) + Math.toRadians(CONSTANTS.MOUNTED_ANGLE));
     }
-    
 
     public void periodic() {
 

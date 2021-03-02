@@ -47,6 +47,11 @@ public class Shooter extends SubsystemBase {
         subsystemActive = true;
     }
 
+    public double calculate() {
+        return Math.sqrt(-2 * CONSTANTS.GRAVITY * (CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND))
+                / Math.sin(Math.toRadians(CONSTANTS.SHOOTER_ANGLE));
+    }
+
     public void spin(double speed) {
         motorSetPoint = speed;
         shooter.set(ControlMode.Velocity, motorSetPoint);
@@ -68,8 +73,8 @@ public class Shooter extends SubsystemBase {
     }
 
     public boolean shooterAtSetpoint() {
-        if (shooter.getSelectedSensorVelocity() >= motorSetPoint * ( 1 - CONSTANTS.SHOOTER_DEADBAND)
-                && shooter.getSelectedSensorVelocity() <= motorSetPoint * ( 1 + CONSTANTS.SHOOTER_DEADBAND)) {
+        if (shooter.getSelectedSensorVelocity() >= motorSetPoint * (1 - CONSTANTS.SHOOTER_DEADBAND)
+                && shooter.getSelectedSensorVelocity() <= motorSetPoint * (1 + CONSTANTS.SHOOTER_DEADBAND)) {
             return true;
         }
         return false;
