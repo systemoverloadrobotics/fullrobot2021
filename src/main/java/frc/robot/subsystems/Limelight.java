@@ -4,6 +4,7 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.CONSTANTS;
 
 public class Limelight extends SubsystemBase {
 
@@ -54,6 +55,10 @@ public class Limelight extends SubsystemBase {
     //returns the size of the target
     public double getTargetArea(){
         return ta.getNumber(0).doubleValue();
+    }
+
+    public double calculateDistance(double verticalAngleOffSet){
+        return (CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND)/ Math.tan(verticalAngleOffSet + CONSTANTS.MOUNTED_ANGLE);
     }
     
 
