@@ -59,9 +59,9 @@ public class Limelight extends SubsystemBase {
         return ta.getNumber(0).doubleValue();
     }
 
-    public double calculateDistance(double verticalAngleOffSet) {
+    public double calculateDistance() {
         return (CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND)
-                / Math.tan(Math.toRadians(verticalAngleOffSet) + Math.toRadians(CONSTANTS.MOUNTED_ANGLE));
+                / Math.tan(Math.toRadians(y) + Math.toRadians(CONSTANTS.MOUNTED_ANGLE));
     }
 
     public void periodic() {

@@ -59,10 +59,6 @@ public class Turret extends SubsystemBase {
         turret.setSelectedSensorPosition(position);
     }
 
-    public void home(){
-        turret.setSelectedSensorPosition(0);
-    }
-
     public boolean found(){
         return RobotContainer.limelight.canSeeTarget() && RobotContainer.limelight.getTargetArea() > 0.8;
     }
@@ -71,6 +67,7 @@ public class Turret extends SubsystemBase {
         return found() && RobotContainer.limelight.getHorizontalAngle() < 1.5;
     }
 
+    //found online
     public double encoderToAngle(double encoder){
         return map(encoder, 0, 2 * CONSTANTS.TURRET_ENCODER_LIMIT/360 , -CONSTANTS.TURRET_ENCODER_LIMIT, CONSTANTS.TURRET_ENCODER_LIMIT);
     }
