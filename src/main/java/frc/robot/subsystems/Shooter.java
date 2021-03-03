@@ -47,9 +47,14 @@ public class Shooter extends SubsystemBase {
         subsystemActive = true;
     }
 
+    public double linerToAngular(double linear){
+        //(velocity(m/s) * 60)/ (2pi * radius)
+        return 0.0;
+    }
+
     public double calculate() {
         return Math.sqrt(-2 * CONSTANTS.GRAVITY * (CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND))
-                / Math.sin(Math.toRadians(CONSTANTS.SHOOTER_ANGLE));
+                / Math.sin(Math.toRadians(CONSTANTS.SHOOTER_ANGLE));//in m/s need to convert to rpm
     }
 
     public void spin(double speed) {
