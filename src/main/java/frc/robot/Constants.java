@@ -50,6 +50,9 @@ public final class CONSTANTS {
     public static final double MOUNTED_ANGLE = 26.5;//in degrees
     public static final double PORT_HEIGHT = Units.inchesToMeters(98.25);
     public static final double HEIGHT_ABOVE_GROUND = 30;//tbd in meter also
+
+    //Pigeon Constants
+    public static final int PIGEON_PORT = 0;
   
 
     

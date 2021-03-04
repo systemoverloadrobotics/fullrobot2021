@@ -2,13 +2,9 @@ package frc.robot.subsystems;
 
 import java.util.logging.Logger;
 
-import com.ctre.phoenix.CANifier;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,7 +15,7 @@ public class Shooter extends SubsystemBase {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private double motorSetPoint;
-    private int numberOfBallsFired;
+    //private int numberOfBallsFired;
 
     private WPI_TalonSRX shooter = new WPI_TalonSRX(1); // config id later
 

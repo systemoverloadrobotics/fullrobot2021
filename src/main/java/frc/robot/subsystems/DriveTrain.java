@@ -2,14 +2,17 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.CONSTANTS.DRIVE;
-import edu.wpi.first.wpilibj.SpeedController;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+import com.ctre.phoenix.sensors.PigeonIMU;
 import com.revrobotics.CANEncoder;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Rotation2d;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+
 import com.revrobotics.EncoderType;
 import frc.robot.CONSTANTS;
 
@@ -36,6 +39,12 @@ public class DriveTrain extends SubsystemBase {
 
     public DifferentialDrive robotDrive = new DifferentialDrive(leftGroup, rightGroup);
 
+    private double[] ypr = new double[3];
+    private PigeonIMU pidgey = new PigeonIMU(CONSTANTS.PIGEON_PORT);
+
+    private DifferentialDriveOdometry odometry;
+
+
 
     public DriveTrain() {
         rightMaster.restoreFactoryDefaults();
@@ -44,6 +53,14 @@ public class DriveTrain extends SubsystemBase {
         leftMaster.restoreFactoryDefaults();
         leftFollower1.restoreFactoryDefaults();
         leftFollower2.restoreFactoryDefaults();
+
+        pidgey.getRawGyro(ypr);
+        odometry =  new DifferentialDriveOdometry(getRotation());
+
+    }
+
+    public Rotation2d getRotation(){
+        return new Rotation2d(ypr[1]);
     }
 
     public void driveArcade(double speed, double turn) {
@@ -69,5 +86,6 @@ public class DriveTrain extends SubsystemBase {
     public double getRightMasterEncoderValue() {
         return rightMasterEncoder.getPosition();
     }
+
 
 }
