@@ -40,12 +40,10 @@ public final class CONSTANTS {
     public static final double SHOOTER_ANGLE = 26.5;//in degrees
     public static final double GRAVITY = -9.8;// in m/s^2
 
-<<<<<<< HEAD
     //PID Constnats
     public static final double KP = 0;
     public static final double KI = 0;
     public static final double KD = 0;
-=======
     //Limelight Constants
     public static final double MOUNTED_ANGLE = 26.5;//in degrees
     public static final double PORT_HEIGHT = Units.inchesToMeters(98.25);
@@ -57,7 +55,6 @@ public final class CONSTANTS {
 
     
 
->>>>>>> limelight func.
 
     //DriveTrain and Driver Controller Constants
     public static final class DRIVE {

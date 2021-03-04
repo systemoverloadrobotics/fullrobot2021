@@ -15,7 +15,7 @@ public class Shooter extends SubsystemBase {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private double motorSetPoint;
-    //private int numberOfBallsFired;
+    // private int numberOfBallsFired;
 
     private WPI_TalonSRX shooter = new WPI_TalonSRX(1); // config id later
 
@@ -43,14 +43,23 @@ public class Shooter extends SubsystemBase {
         subsystemActive = true;
     }
 
-    public double linerToAngular(double linear){
-        //(velocity(m/s) * 60)/ (2pi * radius)
+    public double linerToAngular(double linear) {
+        // (velocity(m/s) * 60)/ (2pi * radius)
         return 0.0;
     }
 
-    public double calculate() {
-        return Math.sqrt(-2 * CONSTANTS.GRAVITY * (CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND))
-                / Math.sin(Math.toRadians(CONSTANTS.SHOOTER_ANGLE));//in m/s need to convert to rpm
+    public double calculate(double distance) {
+        double height = CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND;
+        double angleRad = Math.toRadians(CONSTANTS.SHOOTER_ANGLE);
+        double velocity = distance / Math.cos(Math.toRadians(angleRad))
+                * Math.sqrt((2 * (height - (distance * Math.tan(angleRad))) / CONSTANTS.GRAVITY));
+        return velocity; // in m/s
+        /*
+         * return Math.sqrt(-2 * CONSTANTS.GRAVITY * (CONSTANTS.PORT_HEIGHT -
+         * CONSTANTS.HEIGHT_ABOVE_GROUND)) /
+         * Math.sin(Math.toRadians(CONSTANTS.SHOOTER_ANGLE));//in m/s need to convert to
+         * rpm
+         */
     }
 
     public void spin(double speed) {

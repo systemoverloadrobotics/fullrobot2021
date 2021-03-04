@@ -12,13 +12,9 @@ import frc.robot.RobotContainer;
 
 public class Turret extends SubsystemBase {
 
-<<<<<<< HEAD
     private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later
     private PIDController pid = new PIDController(CONSTANTS.KP, CONSTANTS.KI, CONSTANTS.KD); //change these constants as needed;  
 
-=======
-    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later      
->>>>>>> limelight func.
 
     public Turret() {
 
