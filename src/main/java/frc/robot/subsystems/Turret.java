@@ -25,7 +25,7 @@ public class Turret extends SubsystemBase {
         turret.config_kI(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.I_TURRET);
         turret.config_kD(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.D_TURRET);
         turret.config_IntegralZone(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.IZONE_TURRET);
-        
+
         //Soft Limit
         turret.configForwardSoftLimitEnable(true, CONSTANTS.TURRET_ENCODER_LIMIT);
 
@@ -33,7 +33,7 @@ public class Turret extends SubsystemBase {
     }
 
     public void aim(){
-        
+        MathUtil.clamp(pid.calculate(-CONSTANTS.TURRET_ENCODER_LIMIT, CONSTANTS.TURRET_ENCODER_LIMIT));
     }
 
     public double getVel() {
