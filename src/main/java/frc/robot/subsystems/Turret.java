@@ -3,13 +3,15 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import edu.wpi.first.wpilibj.controller.*;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.CONSTANTS;
 
 public class Turret extends SubsystemBase {
 
-    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later    
+    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later
+    private PIDController pid;  
 
     public Turret() {
 
@@ -24,6 +26,7 @@ public class Turret extends SubsystemBase {
         turret.config_kD(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.D_TURRET);
         turret.config_IntegralZone(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.IZONE_TURRET);
 
+        pid = new PIDController(CONSTANTS.KP, CONSTANTS.KI, CONSTANTS.KD); //change these constants as needed
         //Soft Limit
         turret.configForwardSoftLimitEnable(true, CONSTANTS.TURRET_ENCODER_LIMIT);
 

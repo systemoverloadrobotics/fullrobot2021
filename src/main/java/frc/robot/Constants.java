@@ -37,10 +37,12 @@ public final class CONSTANTS {
     //Shooter Constants
     public static final double SHOOTER_DEADBAND = 0.02;
 
-    
+    //PID Constnats
+    public static final double KP = 0;
+    public static final double KI = 0;
+    public static final double KD = 0;
 
-
-    // Subsystem Constants
+    //DriveTrain and Driver Controller Constants
     public static final class DRIVE {
         public static final int FORWARD_CHANNEL_ID = 2;
         public static final int REVERSE_CHANNEL_ID = 3;
