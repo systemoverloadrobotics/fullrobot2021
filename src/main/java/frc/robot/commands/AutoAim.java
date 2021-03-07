@@ -20,7 +20,7 @@ public class AutoAim extends CommandBase {
     public void execute(){
         if(m_turret.found()){
             m_turret.aim(m_limLimelight.getHorizontalAngle());
-            m_turret.set(0.8);
+            m_turret.set(0.8); //We can set this up later
         }
         else if(m_turret.onTarget()){
             m_turret.stop();
