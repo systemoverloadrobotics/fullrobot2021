@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import frc.robot.commands.ArcadeDrive;
+import frc.robot.commands.AutoAim;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ExampleCommand;
 import frc.robot.subsystems.ExampleSubsystem;
@@ -14,6 +15,7 @@ import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.ScheduleCommand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.CONSTANTS.*;
@@ -42,16 +44,18 @@ public class RobotContainer {
 			() -> movementJoystick.getX(),
 			() -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
 			() -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER));
-
+  private final AutoAim autoAim = new AutoAim(turret, limelight);
   /**
    * The container for the robot.  Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
-
+    final JoystickButton autoAimButton = new JoystickButton(movementJoystick, CONSTANTS.CONTROLS.JOYSTICK.TRIGGER);
     driveTrain.setDefaultCommand(arcadeDrive);
 
+    autoAimButton.whenHeld(autoAim);
     configureButtonBindings();
+
   }
 
   /**
