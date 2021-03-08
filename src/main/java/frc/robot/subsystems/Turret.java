@@ -11,8 +11,7 @@ import frc.robot.RobotContainer;
 
 public class Turret extends SubsystemBase {
 
-    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later 
-    private FeedbackDevice encoder = FeedbackDevice.CTRE_MagEncoder_Relative;
+    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later
 
     public Turret() {
 
