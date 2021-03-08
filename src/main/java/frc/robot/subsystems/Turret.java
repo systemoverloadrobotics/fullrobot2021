@@ -12,7 +12,7 @@ import frc.robot.RobotContainer;
 public class Turret extends SubsystemBase {
 
     private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later 
-
+    private FeedbackDevice encoder = FeedbackDevice.CTRE_MagEncoder_Relative;
 
     public Turret() {
 
@@ -40,10 +40,18 @@ public class Turret extends SubsystemBase {
         turret.set(ControlMode.Position, encoderToAngle(angle));
     }
 
+    public void updateError(double error){
+        if(found()){
+            aim(turret.getSelectedSensorPosition() + error);
+        }
+        else if(onTarget()){
+            stop();
+        }
+    }
+
     public double getVel() {
         return turret.getSelectedSensorVelocity();
     }
-
 
     public void stop() {
         turret.stopMotor();
