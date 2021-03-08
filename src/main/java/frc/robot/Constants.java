@@ -37,6 +37,10 @@ public final class CONSTANTS {
     //Shooter Constants
     public static final double SHOOTER_DEADBAND = 0.02;
 
+    //Intake Constants
+    public static final double INTAKE_SPEED_IN = 0.5;
+    public static final double INTAKE_SPEED_OUT = -0.2;
+
     
 
 
