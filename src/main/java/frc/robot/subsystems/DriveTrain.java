@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj.DoubleSolenoid.Value;
 import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
+import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 
@@ -29,8 +30,9 @@ public class DriveTrain extends SubsystemBase {
     private CANSparkMax leftFollower1 = new CANSparkMax(DRIVE.LEFT_FOLLOWER_1_ID, MotorType.kBrushless);
     private CANSparkMax leftFollower2 = new CANSparkMax(DRIVE.LEFT_FOLLOWER_2_ID, MotorType.kBrushless);
     
-    private CANEncoder leftMasterEncoder = new CANEncoder(leftMaster, EncoderType.kQuadrature, 4069);
-    private CANEncoder rightMasterEncoder = new CANEncoder(rightMaster, EncoderType.kQuadrature, 4069);
+    private CANEncoder leftMasterEncoder = leftMaster.getEncoder(EncoderType.kQuadrature, 4069);
+
+    private CANEncoder rightMasterEncoder = rightMaster.getEncoder(EncoderType.kQuadrature, 4069);
 
     private DoubleSolenoid shifter = new DoubleSolenoid(CONSTANTS.PCM_ID, DRIVE.FORWARD_CHANNEL_ID, DRIVE.REVERSE_CHANNEL_ID);
 
@@ -45,7 +47,6 @@ public class DriveTrain extends SubsystemBase {
     private DifferentialDriveOdometry odometry;
 
 
-
     public DriveTrain() {
         rightMaster.restoreFactoryDefaults();
         rightFollower1.restoreFactoryDefaults();
@@ -57,6 +58,29 @@ public class DriveTrain extends SubsystemBase {
         pidgey.getRawGyro(ypr);
         odometry =  new DifferentialDriveOdometry(getRotation());
 
+    }
+
+    @Override
+    public void periodic(){
+        odometry.update(getRotation(), leftMasterEncoder.getPosition(), rightMasterEncoder.getPosition());
+    }
+
+    public Pose2d getPos(){
+        return odometry.getPoseMeters();
+    }
+
+    public void resetOdometry(Pose2d position){
+        resetEncoder();
+        odometry.resetPosition(position, getRotation());
+    }
+
+    public void resetEncoder(){
+        leftMasterEncoder.setPosition(0);
+        rightMasterEncoder.setPosition(0);
+    }
+
+    public void setMax(double maxOutput){
+        robotDrive.setMaxOutput(maxOutput);
     }
 
     public Rotation2d getRotation(){

@@ -35,7 +35,7 @@ public class Turret extends SubsystemBase {
     }
 
     public void set(double power){
-        turret.set(ControlMode.PercentOutput, power);
+        turret.set(ControlMode.Position, power);
     }
 
     public void aim(double angle){

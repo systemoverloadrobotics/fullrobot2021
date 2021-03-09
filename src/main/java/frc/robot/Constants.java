@@ -6,15 +6,33 @@
 /*----------------------------------------------------------------------------*/
 package frc.robot;
 
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.util.Units;
 
 public final class CONSTANTS {
 
     //General Constants
     public static final int PCM_ID = 3;
-
-   
     public static final int TIMEOUT_MS = 30;
+
+    //Drivetrain Constants
+    public static final double K_S = 0.22;
+    public static final double K_V = 1.98;
+    public static final double K_A = 0.2;
+
+    public static final double P_DRIVE = 8.5;
+
+    public static final double TRACK_WIDTH_METERS = 0.69;
+    public static final DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(TRACK_WIDTH_METERS);
+
+    public static final double MAX_VELOCITY = 3;
+    public static final double MAX_ACCELERATION = 3;
+
+    public static final double RAMSETE_B = 2;
+    public static final double RAMSETE_ZETA = 0.7;
+
+
+
     /**
 	 * Motor neutral dead-band, set to the minimum 0.1%.
 	 */
