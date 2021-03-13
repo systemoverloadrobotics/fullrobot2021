@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
-
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.CONSTANTS;
 import frc.robot.RobotContainer;
@@ -12,6 +12,8 @@ import frc.robot.RobotContainer;
 public class Turret extends SubsystemBase {
 
     private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later
+
+    private double encoderPosition;
 
     public Turret() {
 
@@ -28,24 +30,12 @@ public class Turret extends SubsystemBase {
         
         //Soft Limit
         turret.configForwardSoftLimitEnable(true, CONSTANTS.TURRET_ENCODER_LIMIT);
-
-    }
-
-    public void set(double power){
-        turret.set(ControlMode.PercentOutput, power);
+        
+        
     }
 
     public void aim(double angle){
-        turret.set(ControlMode.Position, encoderToAngle(angle));
-    }
-
-    public void updateError(double error){
-        if(found()){
-            aim(turret.getSelectedSensorPosition() + error);
-        }
-        else if(onTarget()){
-            stop();
-        }
+        turret.set(ControlMode.Position, (angle/CONSTANTS.GEAR_RATIO) * CONSTANTS.UNITS_PER_REVOLUTION);
     }
 
     public double getVel() {
@@ -56,10 +46,6 @@ public class Turret extends SubsystemBase {
         turret.stopMotor();
     }   
 
-    public void setPos(int position){
-        turret.setSelectedSensorPosition(position);
-    }
-
     public boolean found(){
         return RobotContainer.limelight.canSeeTarget() && RobotContainer.limelight.getTargetArea() > 0.8;
     }
@@ -68,19 +54,14 @@ public class Turret extends SubsystemBase {
         return found() && RobotContainer.limelight.getHorizontalAngle() < 1.5;
     }
 
-    //found online
-    public double encoderToAngle(double encoder){
-        return map(encoder, 0, 2 * CONSTANTS.TURRET_ENCODER_LIMIT/360 , -CONSTANTS.TURRET_ENCODER_LIMIT, CONSTANTS.TURRET_ENCODER_LIMIT);
+    public double getAngle(){
+        return (encoderPosition/CONSTANTS.UNITS_PER_REVOLUTION) * CONSTANTS.GEAR_RATIO; //Dummy gear ratio
     }
 
-    //math I found online
-    public static double map(double x, double inputMin, double inputMax, double outputMin, double outputMax) {
-        return ((outputMax - outputMin) / (inputMax - inputMin)) * (x - inputMin) + outputMin;
-    }
 
     @Override
     public void periodic() {
-        // This method will be called once per scheduler run
+        encoderPosition = turret.getSelectedSensorPosition();
     }
 
 }

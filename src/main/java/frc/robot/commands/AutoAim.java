@@ -19,6 +19,12 @@ public class AutoAim extends CommandBase {
 
     @Override
     public void execute(){
-        m_turret.updateError(m_limelight.getHorizontalAngle());
+
+        if(m_turret.found()){
+            m_turret.aim(m_turret.getAngle() + m_limelight.getHorizontalAngle());
+        }
+        else if(m_turret.onTarget()){
+            m_turret.stop();
+        }
     }
 }
