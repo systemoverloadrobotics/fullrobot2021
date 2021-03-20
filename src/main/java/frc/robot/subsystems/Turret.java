@@ -44,14 +44,6 @@ public class Turret extends SubsystemBase {
         turret.stopMotor();
     }
 
-    public boolean found() {
-        return RobotContainer.limelight.canSeeTarget() && RobotContainer.limelight.getTargetArea() > 0.3;
-    }
-
-    public boolean onTarget() {
-        return found() && RobotContainer.limelight.getHorizontalAngle() < CONSTANTS.APPROXIMATE_ANGLE;
-    }
-
     @Override
     public void periodic() {
         // This method will be called once per scheduler run

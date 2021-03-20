@@ -35,7 +35,7 @@ public class RobotContainer {
   private final DriveTrain driveTrain = new DriveTrain();
   private final Turret turret = new Turret();
   private final Shooter shooter = new Shooter();
-  public final static Limelight limelight = new Limelight();
+  public final Limelight limelight = new Limelight();
 
   // Commands
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> movementJoystick.getY(),

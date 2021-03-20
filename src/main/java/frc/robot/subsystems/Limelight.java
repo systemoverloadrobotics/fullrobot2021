@@ -54,6 +54,11 @@ public class Limelight extends SubsystemBase {
         return targetEntry.getNumber(0).intValue() > 0;
     }
 
+    /** @return If the limelight is on target */
+    public boolean onTarget() {
+        return canSeeTarget() && getHorizontalAngle() < CONSTANTS.APPROXIMATE_ANGLE;
+    }
+
     // returns the size of the target
     public double getTargetArea() {
         return ta.getNumber(0).doubleValue();

@@ -43,7 +43,7 @@ public class DriveTrain extends SubsystemBase {
 
     public DifferentialDrive robotDrive = new DifferentialDrive(leftGroup, rightGroup);
 
-    private double[] ypr = new double[3];
+    public double[] ypr = new double[3];
     private double yaw;
     private double pitch;
     private double roll;
@@ -51,8 +51,7 @@ public class DriveTrain extends SubsystemBase {
 
     private DifferentialDriveOdometry odometry;
 
-    public static final DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(
-            CONSTANTS.TRACK_WIDTH_METERS);
+    public DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(CONSTANTS.TRACK_WIDTH_METERS);
 
     public DriveTrain() {
         rightMaster.restoreFactoryDefaults();
