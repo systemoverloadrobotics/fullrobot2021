@@ -43,7 +43,6 @@ public class DriveTrain extends SubsystemBase {
 
     public DifferentialDrive robotDrive = new DifferentialDrive(leftGroup, rightGroup);
 
-    public double[] ypr = new double[3];
     private double yaw;
     private double pitch;
     private double roll;
@@ -67,11 +66,12 @@ public class DriveTrain extends SubsystemBase {
 
     @Override
     public void periodic() {
+        double[] ypr = new double[3];
         odometry.update(getRotation(), leftMasterEncoder.getPosition(), rightMasterEncoder.getPosition());
         pidgey.getYawPitchRoll(ypr);
         yaw = ypr[0];
         pitch = ypr[1];
-        roll = ypr[3];
+        roll = ypr[2];
 
     }
 
