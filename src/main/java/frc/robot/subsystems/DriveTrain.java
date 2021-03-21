@@ -98,6 +98,11 @@ public class DriveTrain extends SubsystemBase {
         robotDrive.arcadeDrive(-speed * DRIVE.SPEED_MULTIPLIER, -turn * DRIVE.TURN_MULTIPLIER);
     }
 
+    public void tankDriveVolts(double leftVolts, double rightVolts) {
+        rightGroup.setVoltage(-rightVolts);
+        leftGroup.setVoltage(leftVolts);
+    }
+
     // Pushes the solenoid forward
     public void shiftUp() {
         shifter.set(Value.kForward);
