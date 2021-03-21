@@ -3,7 +3,9 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.CONSTANTS;
 
 public class Limelight extends SubsystemBase {
 
@@ -31,7 +33,9 @@ public class Limelight extends SubsystemBase {
 
     }
 
-    /** @return a horizontal angle from -27 to 27 between the target and the camera */
+    /**
+     * @return a horizontal angle from -27 to 27 between the target and the camera
+     */
     public double getHorizontalAngle() {
         return horizontalAngleOffSet.getDouble(0);
     }
@@ -42,7 +46,7 @@ public class Limelight extends SubsystemBase {
     }
 
     /** @return If the limelight is connected */
-    public boolean connected(){
+    public boolean connected() {
         return networkTable.getEntry("tx").exists();
     }
 
@@ -50,7 +54,21 @@ public class Limelight extends SubsystemBase {
     public boolean canSeeTarget() {
         return targetEntry.getNumber(0).intValue() > 0;
     }
-    
+
+    /** @return If the limelight is on target */
+    public boolean onTarget() {
+        return canSeeTarget() && getHorizontalAngle() < CONSTANTS.APPROXIMATE_ANGLE;
+    }
+
+    // returns the size of the target
+    public double getTargetArea() {
+        return ta.getNumber(0).doubleValue();
+    }
+
+    public double calculateDistance() {
+        return (CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND)
+                / Math.tan(Math.toRadians(y) + Math.toRadians(CONSTANTS.MOUNTED_ANGLE));
+    }
 
     public void periodic() {
 

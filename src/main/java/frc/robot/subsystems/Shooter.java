@@ -2,13 +2,9 @@ package frc.robot.subsystems;
 
 import java.util.logging.Logger;
 
-import com.ctre.phoenix.CANifier;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
-import com.ctre.phoenix.motorcontrol.LimitSwitchNormal;
-import com.ctre.phoenix.motorcontrol.LimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
-import com.ctre.phoenix.motorcontrol.RemoteLimitSwitchSource;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
@@ -19,7 +15,7 @@ public class Shooter extends SubsystemBase {
 
     private Logger logger = Logger.getLogger(this.getClass().getName());
     private double motorSetPoint;
-    private int numberOfBallsFired;
+    // private int numberOfBallsFired;
 
     private WPI_TalonSRX shooter = new WPI_TalonSRX(1); // config id later
 
@@ -47,6 +43,14 @@ public class Shooter extends SubsystemBase {
         subsystemActive = true;
     }
 
+    public double calculateVelocity(double distance) {
+        double height = CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND;
+        double angleRad = Math.toRadians(CONSTANTS.SHOOTER_ANGLE);
+        double velocity = distance / (Math.cos(angleRad)
+                * Math.sqrt((2 * (height - (distance * Math.tan(angleRad))) / CONSTANTS.GRAVITY)));
+        return velocity; // in m/s
+    }
+
     public void spin(double speed) {
         motorSetPoint = speed;
         shooter.set(ControlMode.Velocity, motorSetPoint);
@@ -68,8 +72,8 @@ public class Shooter extends SubsystemBase {
     }
 
     public boolean shooterAtSetpoint() {
-        if (shooter.getSelectedSensorVelocity() >= motorSetPoint * ( 1 - CONSTANTS.SHOOTER_DEADBAND)
-                && shooter.getSelectedSensorVelocity() <= motorSetPoint * ( 1 + CONSTANTS.SHOOTER_DEADBAND)) {
+        if (shooter.getSelectedSensorVelocity() >= motorSetPoint * (1 - CONSTANTS.SHOOTER_DEADBAND)
+                && shooter.getSelectedSensorVelocity() <= motorSetPoint * (1 + CONSTANTS.SHOOTER_DEADBAND)) {
             return true;
         }
         return false;

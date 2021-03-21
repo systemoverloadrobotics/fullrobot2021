@@ -6,10 +6,11 @@ import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.CONSTANTS;
+import frc.robot.RobotContainer;
 
 public class Turret extends SubsystemBase {
 
-    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later    
+    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later
 
     public Turret() {
 
@@ -24,20 +25,20 @@ public class Turret extends SubsystemBase {
         turret.config_kD(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.D_TURRET);
         turret.config_IntegralZone(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.IZONE_TURRET);
 
-        //Soft Limit
+        // Soft Limit
         turret.configForwardSoftLimitEnable(true, CONSTANTS.TURRET_ENCODER_LIMIT);
 
-
     }
 
-    public void aim(){
-        
-    }
+    // merge conflict
+    /*
+     * public void aim(double angle) { turret.set(ControlMode.Position,
+     * encoderToAngle(angle)); }
+     */
 
     public double getVel() {
         return turret.getSelectedSensorVelocity();
     }
-
 
     public void stop() {
         turret.stopMotor();
@@ -46,6 +47,7 @@ public class Turret extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
+
     }
 
 }
