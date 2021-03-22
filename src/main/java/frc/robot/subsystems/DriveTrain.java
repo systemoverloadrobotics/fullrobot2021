@@ -14,6 +14,7 @@ import edu.wpi.first.wpilibj.geometry.Pose2d;
 import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
+import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 
 import com.revrobotics.EncoderType;
 import frc.robot.CONSTANTS;
@@ -75,7 +76,7 @@ public class DriveTrain extends SubsystemBase {
 
     }
 
-    public Pose2d getPos() {
+    public Pose2d getPose() {
         return odometry.getPoseMeters();
     }
 
@@ -101,6 +102,10 @@ public class DriveTrain extends SubsystemBase {
     public void tankDriveVolts(double leftVolts, double rightVolts) {
         rightGroup.setVoltage(-rightVolts);
         leftGroup.setVoltage(leftVolts);
+    }
+
+    public DifferentialDriveWheelSpeeds getWheelSpeeds() {
+        return new DifferentialDriveWheelSpeeds(leftMasterEncoder.getVelocity(), rightMasterEncoder.getVelocity());
     }
 
     // Pushes the solenoid forward

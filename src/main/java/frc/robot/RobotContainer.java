@@ -6,9 +6,14 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.auto.Barrel;
+import frc.robot.commands.auto.Bounce;
+import frc.robot.commands.auto.Slalom;
 import frc.robot.subsystems.ExampleSubsystem;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
@@ -42,11 +47,19 @@ public class RobotContainer {
       () -> movementJoystick.getX(), () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
       () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER));
 
+  private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
+
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
     // Configure the button bindings
+
+    autoChooser.addOption("Bounce Paths", new Bounce(driveTrain, driveTrain.DRIVE_KINEMATICS));
+    autoChooser.addOption("Barrel Racing Path", new Barrel(driveTrain, driveTrain.DRIVE_KINEMATICS));
+    autoChooser.addOption("Slalom Path", new Slalom(driveTrain, driveTrain.DRIVE_KINEMATICS));
+
+    SmartDashboard.putData("Auton Task", autoChooser);
 
     driveTrain.setDefaultCommand(arcadeDrive);
 
@@ -71,6 +84,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
 
-    return null;
+    return autoChooser.getSelected();
   }
 }
