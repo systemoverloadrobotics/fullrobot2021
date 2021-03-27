@@ -20,10 +20,10 @@ public class AutoAim extends CommandBase {
     @Override
     public void execute(){
 
-        if(m_turret.found()){
-            m_turret.aim(m_turret.getAngle() + m_limelight.getHorizontalAngle());
+        if(m_limelight.canSeeTarget()){
+           m_turret.getVel(); 
         }
-        else if(m_turret.onTarget()){
+        else if(m_limelight.onTarget()){
             m_turret.stop();
         }
     }
