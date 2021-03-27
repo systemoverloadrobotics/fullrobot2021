@@ -3,6 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.CONSTANTS;
 
@@ -52,6 +53,11 @@ public class Limelight extends SubsystemBase {
     /** @return If the limelight has found a target */
     public boolean canSeeTarget() {
         return targetEntry.getNumber(0).intValue() > 0;
+    }
+
+    /** @return If the limelight is on target */
+    public boolean onTarget() {
+        return canSeeTarget() && getHorizontalAngle() < CONSTANTS.APPROXIMATE_ANGLE;
     }
 
     // returns the size of the target
