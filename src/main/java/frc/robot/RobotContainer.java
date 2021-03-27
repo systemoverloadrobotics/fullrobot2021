@@ -43,7 +43,7 @@ public class RobotContainer {
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> movementJoystick.getY(),
       () -> movementJoystick.getX(), () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
       () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER));
-  
+  private final AutoAim autoAim = new AutoAim(turret, limelight);
   /**
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
