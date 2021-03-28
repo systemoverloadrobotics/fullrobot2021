@@ -9,7 +9,6 @@ public class Slalom extends Auto {
     public Slalom(DriveTrain driveTrain, DifferentialDriveKinematics kinematics) {
         super(driveTrain, kinematics);
         new SequentialCommandGroup(generate("TopHalf"), generate("BottomHalf"));
-
     }
 
 }

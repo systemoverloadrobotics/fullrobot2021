@@ -9,7 +9,6 @@ public class Barrel extends Auto {
     public Barrel(DriveTrain driveTrain, DifferentialDriveKinematics kinematics) {
         super(driveTrain, kinematics);
         new SequentialCommandGroup(generate("D5"), generate("B8"), generate("D10"));
-
     }
 
 }

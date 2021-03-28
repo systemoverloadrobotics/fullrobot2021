@@ -19,8 +19,8 @@ import frc.robot.subsystems.DriveTrain;
 
 public class Auto extends SequentialCommandGroup {
 
-    DriveTrain driveTrain;
-    DifferentialDriveKinematics kinematics;
+    protected DriveTrain driveTrain;
+    protected DifferentialDriveKinematics kinematics;
 
     public Auto(DriveTrain driveTrain, DifferentialDriveKinematics kinematics) {
         this.driveTrain = driveTrain;
@@ -30,23 +30,28 @@ public class Auto extends SequentialCommandGroup {
     public Command generate(String path) {
 
         String trajectoryJSON = "src/main/deploy/paths/" + path + ".wpilib.json";
-        Trajectory trajectoryD5 = new Trajectory();
+        Trajectory trajectory = new Trajectory();
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
-            trajectoryD5 = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
+            trajectory = TrajectoryUtil.fromPathweaverJson(trajectoryPath);
         } catch (IOException ex) {
             DriverStation.reportError("Unable to open trajectory: " + trajectoryJSON, ex.getStackTrace());
         }
 
-        RamseteCommand commandD5 = new RamseteCommand(trajectoryD5, driveTrain::getPose,
-                new RamseteController(CONSTANTS.RAMSETE_B, CONSTANTS.RAMSETE_ZETA),
-                new SimpleMotorFeedforward(CONSTANTS.S_DRIVE, CONSTANTS.V_DRIVE, CONSTANTS.A_DRIVE), kinematics,
-                driveTrain::getWheelSpeeds, new PIDController(CONSTANTS.P_DRIVE, 0, 0), // left
-                new PIDController(CONSTANTS.P_DRIVE, 0, 0), // right
-                driveTrain::tankDriveVolts, driveTrain);
+        RamseteCommand commandD5 = new RamseteCommand(
+            trajectory, 
+            driveTrain::getPose,
+            new RamseteController(CONSTANTS.RAMSETE_B, CONSTANTS.RAMSETE_ZETA),
+            new SimpleMotorFeedforward(CONSTANTS.S_DRIVE, CONSTANTS.V_DRIVE, CONSTANTS.A_DRIVE), 
+            kinematics,
+            driveTrain::getWheelSpeeds, 
+            new PIDController(CONSTANTS.P_DRIVE, 0, 0), // left
+            new PIDController(CONSTANTS.P_DRIVE, 0, 0), // right
+            driveTrain::tankDriveVolts, 
+            driveTrain);
 
         // Reset odometry to the starting pose of the trajectory.
-        driveTrain.resetOdometry(trajectoryD5.getInitialPose());
+        driveTrain.resetOdometry(trajectory.getInitialPose());
 
         return commandD5.andThen(() -> driveTrain.tankDriveVolts(0, 0));
     }

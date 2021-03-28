@@ -55,10 +55,10 @@ public class RobotContainer {
   public RobotContainer() {
     // Configure the button bindings
 
+    // Autonomous Chooser
     autoChooser.addOption("Bounce Paths", new Bounce(driveTrain, driveTrain.DRIVE_KINEMATICS));
     autoChooser.addOption("Barrel Racing Path", new Barrel(driveTrain, driveTrain.DRIVE_KINEMATICS));
     autoChooser.addOption("Slalom Path", new Slalom(driveTrain, driveTrain.DRIVE_KINEMATICS));
-
     SmartDashboard.putData("Auton Task", autoChooser);
 
     driveTrain.setDefaultCommand(arcadeDrive);
