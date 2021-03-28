@@ -12,6 +12,7 @@ public class Turret extends SubsystemBase {
 
     private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later
 
+
     public Turret() {
 
         turret.configFactoryDefault();
@@ -42,6 +43,7 @@ public class Turret extends SubsystemBase {
 
     public void stop() {
         turret.stopMotor();
+
     }
 
     @Override

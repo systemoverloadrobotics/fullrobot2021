@@ -35,8 +35,8 @@ public final class CONSTANTS {
      */
     public static final double NEUTRAL_DEADBAND = 0.05;
     public static final int UNITS_PER_REVOLUTION = 2048; /* this is constant for Talon FX */
-
-    // Gains
+    public static final double GEAR_RATIO = 0.5;
+    
     public static final int TALON_PRIMARY_CLOSED_LOOP = 0;
 
     // Turret Constants
