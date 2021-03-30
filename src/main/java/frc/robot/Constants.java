@@ -41,8 +41,11 @@ public final class CONSTANTS {
     public static final double INTAKE_SPEED_IN = 0.5;
     public static final double INTAKE_SPEED_OUT = -0.2;
 
+    //Storage Constants
+    public static final double STORAGE_SPIN = 0.5;
+    public static final double STORAGE_SPIN_SPEED = 5;
+    //what is the speed in inches per second?
     
-
 
     // Subsystem Constants
     public static final class DRIVE {

@@ -16,10 +16,10 @@ public class Intake extends SubsystemBase{
 
     //One of these needs to be negative
     public void spinInBar(){
-        intakeBar.set(ControlMode.PercentOutput, -CONSTANTS.INTAKE_SPEED);
+        intakeBar.set(ControlMode.PercentOutput, CONSTANTS.INTAKE_SPEED_IN);
     }
 
     public void spinOutBar(){
-        intakeBar.set(ControlMode.PercentOutput, CONSTANTS.INTAKE_SPEED);
+        intakeBar.set(ControlMode.PercentOutput, CONSTANTS.INTAKE_SPEED_OUT);
     }
 }
