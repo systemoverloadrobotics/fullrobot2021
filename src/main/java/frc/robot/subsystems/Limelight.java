@@ -5,7 +5,7 @@ import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.CONSTANTS;
+import frc.robot.Constants;
 
 public class Limelight extends SubsystemBase {
 
@@ -57,7 +57,7 @@ public class Limelight extends SubsystemBase {
 
     /** @return If the limelight is on target */
     public boolean onTarget() {
-        return canSeeTarget() && getHorizontalAngle() < CONSTANTS.APPROXIMATE_ANGLE;
+        return canSeeTarget() && getHorizontalAngle() < Constants.APPROXIMATE_ANGLE;
     }
 
     // returns the size of the target
@@ -66,8 +66,8 @@ public class Limelight extends SubsystemBase {
     }
 
     public double calculateDistance() {
-        return (CONSTANTS.PORT_HEIGHT - CONSTANTS.HEIGHT_ABOVE_GROUND)
-                / Math.tan(Math.toRadians(y) + Math.toRadians(CONSTANTS.MOUNTED_ANGLE));
+        return (Constants.PORT_HEIGHT - Constants.HEIGHT_ABOVE_GROUND)
+                / Math.tan(Math.toRadians(y) + Math.toRadians(Constants.MOUNTED_ANGLE));
     }
 
     public void periodic() {

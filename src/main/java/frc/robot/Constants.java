@@ -9,7 +9,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.util.Units;
 
-public final class CONSTANTS {
+public final class Constants {
 
     // General Constants
     public static final int PCM_ID = 3;
