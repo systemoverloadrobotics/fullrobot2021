@@ -6,6 +6,9 @@ package frc.robot.commands;
 
 import frc.robot.subsystems.DriveTrain;
 
+// THIS CODE IS DEPREVATED BECAUSE I MADE A MISTAKE
+// WE MAY USE IT IF BASIL'S AUTONAV DOESN'T WORK
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
