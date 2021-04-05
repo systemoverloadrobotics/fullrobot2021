@@ -8,7 +8,7 @@ public class Bounce extends Auto {
 
     public Bounce(DriveTrain driveTrain, DifferentialDriveKinematics kinematics) {
         super(driveTrain, kinematics);
-        new SequentialCommandGroup(generate("A6"), generate("A9"), generate("A3"), generate("Finish"));
+//        new SequentialCommandGroup(generate("A6"), generate("A9"), generate("A3"), generate("Finish"));
     }
 
 }

@@ -28,7 +28,7 @@ public class Auto extends SequentialCommandGroup {
     }
 
     public Command generate(String path) {
-
+        /*
         String trajectoryJSON = "src/main/deploy/paths/" + path + ".wpilib.json";
         Trajectory trajectory = new Trajectory();
         try {
@@ -52,8 +52,10 @@ public class Auto extends SequentialCommandGroup {
 
         // Reset odometry to the starting pose of the trajectory.
         driveTrain.resetOdometry(trajectory.getInitialPose());
-
+        
         return commandD5.andThen(() -> driveTrain.tankDriveVolts(0, 0));
+        */
+        return null;
     }
 
 }

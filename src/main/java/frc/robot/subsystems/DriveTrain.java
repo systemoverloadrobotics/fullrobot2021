@@ -36,8 +36,7 @@ public class DriveTrain extends SubsystemBase {
 
     private CANEncoder rightMasterEncoder = rightMaster.getEncoder(EncoderType.kQuadrature, 4069);
 
-    private DoubleSolenoid shifter = new DoubleSolenoid(Constants.PCM_ID, DRIVE.FORWARD_CHANNEL_ID,
-            DRIVE.REVERSE_CHANNEL_ID);
+    private DoubleSolenoid shifter = new DoubleSolenoid(Constants.PCM_ID, DRIVE.FORWARD_CHANNEL_ID, DRIVE.REVERSE_CHANNEL_ID);
 
     private SpeedControllerGroup rightGroup = new SpeedControllerGroup(rightMaster, rightFollower1, rightFollower2);
     private SpeedControllerGroup leftGroup = new SpeedControllerGroup(leftMaster, leftFollower1, leftFollower2);
@@ -96,7 +95,7 @@ public class DriveTrain extends SubsystemBase {
 
     public void driveArcade(double speed, double turn) {
         // incase we need arcade drive
-        robotDrive.arcadeDrive(-speed * DRIVE.SPEED_MULTIPLIER, -turn * DRIVE.TURN_MULTIPLIER);
+        robotDrive.arcadeDrive(speed * DRIVE.SPEED_MULTIPLIER, -turn * DRIVE.TURN_MULTIPLIER);
     }
 
     public void tankDriveVolts(double leftVolts, double rightVolts) {
