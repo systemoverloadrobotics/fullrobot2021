@@ -76,6 +76,10 @@ public final class Constants {
         public static final int LEFT_FOLLOWER_2_ID = 8;
         public static final double SPEED_MULTIPLIER = 1;
         public static final double TURN_MULTIPLIER = 0.4;
+
+        public static final double DECELERATION_MULTIPLIER = 0.5;
+        // 0 is infinite deceleration (AKA no change ever) and 1 is no deceleration (instant change)
+        public static final double SLOWDOWN_MULTIPLIER = 0.5;
     }
 
     public static final class CONTROLS {
