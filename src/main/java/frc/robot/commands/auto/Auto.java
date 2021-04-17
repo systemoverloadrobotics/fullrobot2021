@@ -28,8 +28,8 @@ public class Auto extends SequentialCommandGroup {
     }
 
     public Command generate(String path) {
-        /*
-        String trajectoryJSON = "src/main/deploy/paths/" + path + ".wpilib.json";
+
+        String trajectoryJSON = "paths/" + path + ".wpilib.json";
         Trajectory trajectory = new Trajectory();
         try {
             Path trajectoryPath = Filesystem.getDeployDirectory().toPath().resolve(trajectoryJSON);
@@ -54,8 +54,6 @@ public class Auto extends SequentialCommandGroup {
         driveTrain.resetOdometry(trajectory.getInitialPose());
         
         return commandD5.andThen(() -> driveTrain.tankDriveVolts(0, 0));
-        */
-        return null;
     }
 
 }
