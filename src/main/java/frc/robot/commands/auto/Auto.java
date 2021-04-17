@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.RamseteCommand;
 import edu.wpi.first.wpilibj.controller.SimpleMotorFeedforward;
 import edu.wpi.first.wpilibj2.command.*;
-import frc.robot.CONSTANTS;
+import frc.robot.Constants;
 import frc.robot.subsystems.DriveTrain;
 
 public class Auto extends SequentialCommandGroup {
@@ -28,7 +28,7 @@ public class Auto extends SequentialCommandGroup {
     }
 
     public Command generate(String path) {
-
+        /*
         String trajectoryJSON = "src/main/deploy/paths/" + path + ".wpilib.json";
         Trajectory trajectory = new Trajectory();
         try {
@@ -41,19 +41,21 @@ public class Auto extends SequentialCommandGroup {
         RamseteCommand commandD5 = new RamseteCommand(
             trajectory, 
             driveTrain::getPose,
-            new RamseteController(CONSTANTS.RAMSETE_B, CONSTANTS.RAMSETE_ZETA),
-            new SimpleMotorFeedforward(CONSTANTS.S_DRIVE, CONSTANTS.V_DRIVE, CONSTANTS.A_DRIVE), 
+            new RamseteController(Constants.RAMSETE_B, Constants.RAMSETE_ZETA),
+            new SimpleMotorFeedforward(Constants.S_DRIVE, Constants.V_DRIVE, Constants.A_DRIVE), 
             kinematics,
             driveTrain::getWheelSpeeds, 
-            new PIDController(CONSTANTS.P_DRIVE, 0, 0), // left
-            new PIDController(CONSTANTS.P_DRIVE, 0, 0), // right
+            new PIDController(Constants.P_DRIVE, 0, 0), // left
+            new PIDController(Constants.P_DRIVE, 0, 0), // right
             driveTrain::tankDriveVolts, 
             driveTrain);
 
         // Reset odometry to the starting pose of the trajectory.
         driveTrain.resetOdometry(trajectory.getInitialPose());
-
+        
         return commandD5.andThen(() -> driveTrain.tankDriveVolts(0, 0));
+        */
+        return null;
     }
 
 }

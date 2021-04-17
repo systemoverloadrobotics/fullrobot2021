@@ -21,7 +21,7 @@ import frc.robot.subsystems.Turret;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import frc.robot.CONSTANTS.*;
+import frc.robot.Constants.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since
@@ -44,8 +44,11 @@ public class RobotContainer {
 
   // Commands
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> movementJoystick.getY(),
-      () -> movementJoystick.getX(), () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
-      () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER));
+      () -> movementJoystick.getX(), 
+      () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
+      () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER), 
+      () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.THUMB), 
+      () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.THUMB));
 
   private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 

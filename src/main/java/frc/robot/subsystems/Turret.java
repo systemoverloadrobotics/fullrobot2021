@@ -5,7 +5,7 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.CONSTANTS;
+import frc.robot.Constants;
 import frc.robot.RobotContainer;
 
 public class Turret extends SubsystemBase {
@@ -19,14 +19,14 @@ public class Turret extends SubsystemBase {
         turret.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
 
         // PID
-        turret.config_kF(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.F_TURRET);
-        turret.config_kP(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.P_TURRET);
-        turret.config_kI(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.I_TURRET);
-        turret.config_kD(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.D_TURRET);
-        turret.config_IntegralZone(CONSTANTS.TURRET_PID_SLOT, CONSTANTS.IZONE_TURRET);
+        turret.config_kF(Constants.TURRET_PID_SLOT, Constants.F_TURRET);
+        turret.config_kP(Constants.TURRET_PID_SLOT, Constants.P_TURRET);
+        turret.config_kI(Constants.TURRET_PID_SLOT, Constants.I_TURRET);
+        turret.config_kD(Constants.TURRET_PID_SLOT, Constants.D_TURRET);
+        turret.config_IntegralZone(Constants.TURRET_PID_SLOT, Constants.IZONE_TURRET);
 
         // Soft Limit
-        turret.configForwardSoftLimitEnable(true, CONSTANTS.TURRET_ENCODER_LIMIT);
+        turret.configForwardSoftLimitEnable(true, Constants.TURRET_ENCODER_LIMIT);
 
     }
 

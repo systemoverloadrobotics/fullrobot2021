@@ -1,7 +1,7 @@
 package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.CONSTANTS.DRIVE;
+import frc.robot.Constants.DRIVE;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 import com.ctre.phoenix.sensors.PigeonIMU;
@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 
 import com.revrobotics.EncoderType;
-import frc.robot.CONSTANTS;
+import frc.robot.Constants;
 
 import java.io.Console;
 import java.util.function.BooleanSupplier;
@@ -36,8 +36,7 @@ public class DriveTrain extends SubsystemBase {
 
     private CANEncoder rightMasterEncoder = rightMaster.getEncoder(EncoderType.kQuadrature, 4069);
 
-    private DoubleSolenoid shifter = new DoubleSolenoid(CONSTANTS.PCM_ID, DRIVE.FORWARD_CHANNEL_ID,
-            DRIVE.REVERSE_CHANNEL_ID);
+    private DoubleSolenoid shifter = new DoubleSolenoid(Constants.PCM_ID, DRIVE.FORWARD_CHANNEL_ID, DRIVE.REVERSE_CHANNEL_ID);
 
     private SpeedControllerGroup rightGroup = new SpeedControllerGroup(rightMaster, rightFollower1, rightFollower2);
     private SpeedControllerGroup leftGroup = new SpeedControllerGroup(leftMaster, leftFollower1, leftFollower2);
@@ -47,11 +46,11 @@ public class DriveTrain extends SubsystemBase {
     private double yaw;
     private double pitch;
     private double roll;
-    private PigeonIMU pidgey = new PigeonIMU(CONSTANTS.PIGEON_PORT);
+    private PigeonIMU pidgey = new PigeonIMU(Constants.PIGEON_PORT);
 
     private DifferentialDriveOdometry odometry;
 
-    public DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(CONSTANTS.TRACK_WIDTH_METERS);
+    public DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(Constants.TRACK_WIDTH_METERS);
 
     public DriveTrain() {
         rightMaster.restoreFactoryDefaults();
@@ -96,7 +95,7 @@ public class DriveTrain extends SubsystemBase {
 
     public void driveArcade(double speed, double turn) {
         // incase we need arcade drive
-        robotDrive.arcadeDrive(-speed * DRIVE.SPEED_MULTIPLIER, -turn * DRIVE.TURN_MULTIPLIER);
+        robotDrive.arcadeDrive(speed * DRIVE.SPEED_MULTIPLIER, -turn * DRIVE.TURN_MULTIPLIER);
     }
 
     public void tankDriveVolts(double leftVolts, double rightVolts) {
