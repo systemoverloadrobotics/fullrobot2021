@@ -4,6 +4,8 @@
 
 package frc.robot;
 
+import javax.swing.plaf.basic.BasicDirectoryModel;
+
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
@@ -87,6 +89,6 @@ public class RobotContainer {
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
 
-    return autoChooser.getSelected();
+    return new Barrel(driveTrain, driveTrain.DRIVE_KINEMATICS);
   }
 }
