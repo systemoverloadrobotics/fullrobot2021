@@ -4,7 +4,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.CONSTANTS;
+import frc.robot.Constants;
 
 
 public class LowerStorage extends SubsystemBase{
@@ -28,9 +28,9 @@ public class LowerStorage extends SubsystemBase{
         //If speed = distance/time, distance = speed * time. 
         //Maybe set to a constant speed and control time to get distance.
         double move = distance;
-        double time = move * CONSTANTS.STORAGE_SPIN_SPEED;
+        double time = move * Constants.STORAGE_SPIN_SPEED;
         while (move > x)
-            lowerMotor.set(ControlMode.PercentOutput, CONSTANTS.STORAGE_SPIN);
+            lowerMotor.set(ControlMode.PercentOutput, Constants.STORAGE_SPIN);
 
     }
 
