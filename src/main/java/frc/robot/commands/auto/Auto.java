@@ -28,7 +28,6 @@ public class Auto extends SequentialCommandGroup {
     }
 
     public Command generate(String path) {
-
         String trajectoryJSON = "paths/" + path + ".wpilib.json";
         Trajectory trajectory = new Trajectory();
         try {
