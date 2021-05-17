@@ -65,6 +65,17 @@ public final class Constants {
     public static final int PIGEON_PORT = 0;
 
     // DriveTrain and Driver Controller Constants
+    //Intake Constants
+    public static final double INTAKE_SPEED_IN = 0.5;
+    public static final double INTAKE_SPEED_OUT = -0.2;
+
+    //Storage Constants
+    public static final double STORAGE_SPIN = 0.5;
+    public static final double STORAGE_SPIN_SPEED = 5;
+    //what is the speed in inches per second?
+    
+
+    // Subsystem Constants
     public static final class DRIVE {
         public static final int FORWARD_CHANNEL_ID = 6;
         public static final int REVERSE_CHANNEL_ID = 7;
