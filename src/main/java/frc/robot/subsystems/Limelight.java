@@ -14,11 +14,14 @@ public class Limelight extends SubsystemBase {
     private NetworkTableEntry horizontalAngleOffSet;
     private NetworkTableEntry verticalAngleOffSet;
     private NetworkTableEntry ta;
+    private NetworkTableEntry ledMode;
 
     private boolean target;
     private double x;
     private double y;
     private double area;
+
+    private boolean isActive;
 
     public Limelight() {
 
@@ -30,6 +33,7 @@ public class Limelight extends SubsystemBase {
         verticalAngleOffSet = networkTable.getEntry("ty"); // Vertical Offset From Crosshair To Target (-20.5 degrees to
                                                            // 20.5 degrees)
         ta = networkTable.getEntry("ta"); // Target Area (0% of image to 100% of image
+        ledMode = networkTable.getEntry("ledMode");
 
     }
 
@@ -68,6 +72,14 @@ public class Limelight extends SubsystemBase {
     public double calculateDistance() {
         return (Constants.PORT_HEIGHT - Constants.HEIGHT_ABOVE_GROUND)
                 / Math.tan(Math.toRadians(y) + Math.toRadians(Constants.MOUNTED_ANGLE));
+    }
+
+    public void turnOn() {
+        ledMode.setDouble(3);
+    }
+
+    public void turnOff() {
+        ledMode.setDouble(1);
     }
 
     public void periodic() {
