@@ -15,13 +15,10 @@ import edu.wpi.first.networktables.NetworkTable;
 import edu.wpi.first.networktables.NetworkTableEntry;
 import edu.wpi.first.networktables.NetworkTableInstance;
 
+public class Outtake extends SubsystemBase {
 
-public class Outtake extends SubsystemBase{
+    public Outtake() {
 
-    public Outtake(){
-        
-        
     }
-
 
 }

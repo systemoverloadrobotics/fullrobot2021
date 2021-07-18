@@ -23,7 +23,9 @@ public class RotateTurret extends CommandBase {
 
     @Override
     public void end(boolean interrupted) {
-        turret.stop();
+        if (Math.abs(lime.getHorizontalAngle()) <= 1.5) {
+            turret.stop();
+        }
     }
 
 }

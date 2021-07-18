@@ -4,10 +4,13 @@
 
 package frc.robot;
 
+import javax.naming.directory.DirContext;
 import javax.swing.plaf.basic.BasicDirectoryModel;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ArcadeDrive;
@@ -44,13 +47,22 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Limelight limelight = new Limelight();
 
+  private final Field2d field = new Field2d();
+
+  // Xbox Controller
+  XboxController controller = new XboxController(0);
+
   // Commands
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> movementJoystick.getY(),
-      () -> movementJoystick.getX(), 
-      () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
-      () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER), 
-      () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.THUMB), 
+      () -> movementJoystick.getX(), () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
+      () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER),
+      () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.THUMB),
       () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.THUMB));
+
+  private final ArcadeDrive arcadeDrive2 = new ArcadeDrive(driveTrain, () -> controller.getY(Hand.kLeft),
+      () -> controller.getX(Hand.kLeft), () -> controller.getRawButtonReleased(11),
+      () -> controller.getRawButtonPressed(11), () -> controller.getBumperReleased(Hand.kRight),
+      () -> controller.getBumperPressed(Hand.kRight));
 
   private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 
@@ -65,8 +77,10 @@ public class RobotContainer {
     autoChooser.addOption("Barrel Racing Path", new Barrel(driveTrain, driveTrain.DRIVE_KINEMATICS));
     autoChooser.addOption("Slalom Path", new Slalom(driveTrain, driveTrain.DRIVE_KINEMATICS));
     SmartDashboard.putData("Auton Task", autoChooser);
+    SmartDashboard.putData("Field", field);
+    System.out.println(controller.getPort());
 
-    driveTrain.setDefaultCommand(arcadeDrive);
+    driveTrain.setDefaultCommand(arcadeDrive2);
 
     configureButtonBindings();
   }
