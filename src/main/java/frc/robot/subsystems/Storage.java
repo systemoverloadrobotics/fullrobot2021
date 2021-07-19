@@ -27,10 +27,7 @@ public class Storage extends SubsystemBase {
     }
 
     public void spinLowerMotor() {
-        double delay = 0.0;
-        while (System.currentTimeMillis() - delay < 2.0) {
-            lowerMotor.set(ControlMode.PercentOutput, 0.5);
-        }
+        lowerMotor.set(ControlMode.PercentOutput, 0.5);
     }
 
     public void spinUpperMotor() {

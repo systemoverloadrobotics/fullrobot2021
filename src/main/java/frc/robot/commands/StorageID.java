@@ -7,7 +7,8 @@ public class StorageID extends CommandBase {
 
     private Storage storage;
 
-    public StorageID() {
+    public StorageID(Storage storage) {
+        this.storage = storage;
         addRequirements(storage);
     }
 
