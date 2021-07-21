@@ -7,7 +7,7 @@ public class IntakeBall extends CommandBase {
     
     private Intake intake;
 
-    public IntakeBall() {
+    public IntakeBall(Intake intake) {
         intake = new Intake();
         addRequirements(intake);
     }

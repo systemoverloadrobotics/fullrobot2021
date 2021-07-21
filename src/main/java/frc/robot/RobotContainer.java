@@ -17,11 +17,13 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeBall;
 import frc.robot.commands.RotateTurret;
 import frc.robot.commands.auto.Barrel;
 import frc.robot.commands.auto.Bounce;
 import frc.robot.commands.auto.Slalom;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
@@ -49,6 +51,7 @@ public class RobotContainer {
   private final Turret turret = new Turret();
   private final Shooter shooter = new Shooter();
   private final Limelight limelight = new Limelight();
+  private final Intake intake = new Intake();
 
   private final Field2d field = new Field2d();
 
@@ -70,6 +73,7 @@ public class RobotContainer {
       () -> controller.getRawButtonPressed(4), () -> controller.getRawButtonReleased(1),
       () -> controller.getRawButtonPressed(1));
   private final RotateTurret rtCommand = new RotateTurret();
+  private final IntakeBall intakeBallCommand = new IntakeBall(intake);
 
   private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 
@@ -107,9 +111,12 @@ public class RobotContainer {
 
     // Buttons
     JoystickButton rotateTurret = new JoystickButton(controller, 5);
+    JoystickButton intakeBall = new JoystickButton(controller, 4);
 
     // Mapping
     rotateTurret.whenPressed(rtCommand);
+    intakeBall.whenHeld(intakeBallCommand);
+
 
   }
 
