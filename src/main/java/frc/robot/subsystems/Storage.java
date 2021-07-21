@@ -11,6 +11,7 @@ public class Storage extends SubsystemBase {
     private WPI_VictorSPX lowerMotor = new WPI_VictorSPX(0);// dummy test
     private WPI_VictorSPX upperMotor = new WPI_VictorSPX(1);
     private DigitalInput[] sensors = new DigitalInput[5];
+    private int ballCount = 0;
 
     public Storage() {
         // config
@@ -24,6 +25,18 @@ public class Storage extends SubsystemBase {
         // encoder retrieval
         lowerMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         upperMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
+
+        ballCount = 3;
+    }
+
+    public void spinBoth(){
+        spinLowerMotor();
+        spinUpperMotor();
+    }
+
+    public void stopBoth(){
+        stopUpperMotor();
+        stopLowerMotor();
     }
 
     public void spinLowerMotor() {
@@ -42,8 +55,28 @@ public class Storage extends SubsystemBase {
         upperMotor.stopMotor();
     }
 
-    public boolean getSensor(int index) {
+    public DigitalInput[] getAllSensors(){
+        return this.sensors;
+    }
+
+    public DigitalInput getSensor(int index) {
+        return sensors[index];
+    }
+
+    public boolean getSensorValue(int index){
         return sensors[index].get();
+    }
+
+    public int getBallCount(){
+        return this.ballCount;
+    }
+
+    public void setBallCount(int ball){
+        this.ballCount = ball;
+    }
+
+    public void incBallCount(){
+        ballCount++;
     }
 
     @Override

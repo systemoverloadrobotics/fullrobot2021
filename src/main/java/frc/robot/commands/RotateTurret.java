@@ -17,7 +17,7 @@ public class RotateTurret extends CommandBase {
     public void execute() {
         lime.turnOn();
         if (lime.canSeeTarget() && lime.getHorizontalAngle() > 1.5) {
-            turret.set(lime.getHorizontalAngle() > 0 ? 1 : -1);
+            turret.set(lime.getHorizontalAngle() > 0 ? 0.5 : -0.5);
         }
     }
 

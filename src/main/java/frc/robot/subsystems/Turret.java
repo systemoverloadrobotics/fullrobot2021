@@ -37,7 +37,7 @@ public class Turret extends SubsystemBase {
      */
 
     public void set(double rpm) {
-        turret.set(ControlMode.Velocity, rpm);
+        turret.set(ControlMode.PercentOutput, rpm);
     }
 
     public double getVel() {
