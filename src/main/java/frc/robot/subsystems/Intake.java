@@ -22,4 +22,8 @@ public class Intake extends SubsystemBase{
     public void spinOutBar(){
         intakeBar.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED_OUT);
     }
+
+    public void stop(){
+        intakeBar.set(ControlMode.PercentOutput, 0);
+    }
 }

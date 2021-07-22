@@ -36,6 +36,10 @@ public class Turret extends SubsystemBase {
      * encoderToAngle(angle)); }
      */
 
+    public void set(double rpm) {
+        turret.set(ControlMode.PercentOutput, rpm);
+    }
+
     public double getVel() {
         return turret.getSelectedSensorVelocity();
     }

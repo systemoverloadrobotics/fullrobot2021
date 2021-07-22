@@ -4,23 +4,31 @@
 
 package frc.robot;
 
+import javax.naming.directory.DirContext;
 import javax.swing.plaf.basic.BasicDirectoryModel;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeBall;
+import frc.robot.commands.RotateTurret;
 import frc.robot.commands.auto.Barrel;
 import frc.robot.commands.auto.Bounce;
 import frc.robot.commands.auto.Slalom;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import frc.robot.Constants.*;
@@ -43,14 +51,29 @@ public class RobotContainer {
   private final Turret turret = new Turret();
   private final Shooter shooter = new Shooter();
   private final Limelight limelight = new Limelight();
+  private final Intake intake = new Intake();
+
+  private final Field2d field = new Field2d();
+
+  // Xbox Controller
+  XboxController controller = new XboxController(0);
 
   // Commands
-  private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> movementJoystick.getY(),
-      () -> movementJoystick.getX(), 
-      () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
-      () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER), 
-      () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.THUMB), 
-      () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.THUMB));
+  /*
+   * private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () ->
+   * movementJoystick.getY(), () -> movementJoystick.getX(), () ->
+   * movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER), () ->
+   * movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER), () ->
+   * movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.THUMB), () ->
+   * movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.THUMB));
+   */
+
+  private final ArcadeDrive arcadeDrive2 = new ArcadeDrive(driveTrain, () -> controller.getAxisType(2),
+      () -> controller.getAxisType(1), () -> controller.getRawButtonReleased(4),
+      () -> controller.getRawButtonPressed(4), () -> controller.getRawButtonReleased(1),
+      () -> controller.getRawButtonPressed(1));
+  private final RotateTurret rtCommand = new RotateTurret();
+  private final IntakeBall intakeBallCommand = new IntakeBall(intake);
 
   private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 
@@ -64,9 +87,16 @@ public class RobotContainer {
     autoChooser.addOption("Bounce Paths", new Bounce(driveTrain, driveTrain.DRIVE_KINEMATICS));
     autoChooser.addOption("Barrel Racing Path", new Barrel(driveTrain, driveTrain.DRIVE_KINEMATICS));
     autoChooser.addOption("Slalom Path", new Slalom(driveTrain, driveTrain.DRIVE_KINEMATICS));
-    SmartDashboard.putData("Auton Task", autoChooser);
 
-    driveTrain.setDefaultCommand(arcadeDrive);
+    // SmartDashboard
+    SmartDashboard.putData("Auton Task", autoChooser);
+    SmartDashboard.putData("Field", field);
+    SmartDashboard.putNumber("RightPosition", driveTrain.getRightMasterEncoderValue());
+    SmartDashboard.putNumber("LeftPosition", driveTrain.getLeftMasterEncoderValue());
+
+    // System.out.println(controller.getPort());
+
+    driveTrain.setDefaultCommand(arcadeDrive2);
 
     configureButtonBindings();
   }
@@ -78,6 +108,15 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+
+    // Buttons
+    JoystickButton rotateTurret = new JoystickButton(controller, 5);
+    JoystickButton intakeBall = new JoystickButton(controller, 4);
+
+    // Mapping
+    rotateTurret.whenPressed(rtCommand);
+    intakeBall.whenHeld(intakeBallCommand);
+
 
   }
 
