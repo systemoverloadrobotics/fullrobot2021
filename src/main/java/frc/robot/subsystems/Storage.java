@@ -19,14 +19,13 @@ public class Storage extends SubsystemBase {
         upperMotor.configFactoryDefault();
         lowerMotor.setNeutralMode(NeutralMode.Brake);
         upperMotor.setNeutralMode(NeutralMode.Brake);
+        //DIO 0-4 sensors are for the balls
         for (int i = 0; i < 5; i++) {
             sensors[i] = new DigitalInput(i);
         }
         // encoder retrieval
         lowerMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
         upperMotor.configSelectedFeedbackSensor(FeedbackDevice.CTRE_MagEncoder_Relative);
-
-        ballCount = 3;
     }
 
     public void spinBoth(){
@@ -63,9 +62,6 @@ public class Storage extends SubsystemBase {
         return sensors[index];
     }
 
-    public boolean getSensorValue(int index){
-        return sensors[index].get();
-    }
 
     public int getBallCount(){
         return this.ballCount;

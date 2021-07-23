@@ -21,7 +21,6 @@ public class Limelight extends SubsystemBase {
     private double y;
     private double area;
 
-    private boolean isActive;
 
     public Limelight() {
 
@@ -34,7 +33,7 @@ public class Limelight extends SubsystemBase {
                                                            // 20.5 degrees)
         ta = networkTable.getEntry("ta"); // Target Area (0% of image to 100% of image
         ledMode = networkTable.getEntry("ledMode");
-
+        
     }
 
     /**

@@ -31,6 +31,7 @@ import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.*;
 
 /**
@@ -59,16 +60,8 @@ public class RobotContainer {
   XboxController controller = new XboxController(0);
 
   // Commands
-  /*
-   * private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () ->
-   * movementJoystick.getY(), () -> movementJoystick.getX(), () ->
-   * movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER), () ->
-   * movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER), () ->
-   * movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.THUMB), () ->
-   * movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.THUMB));
-   */
 
-  private final ArcadeDrive arcadeDrive2 = new ArcadeDrive(driveTrain, () -> controller.getAxisType(2),
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> controller.getAxisType(2),
       () -> controller.getAxisType(1), () -> controller.getRawButtonReleased(4),
       () -> controller.getRawButtonPressed(4), () -> controller.getRawButtonReleased(1),
       () -> controller.getRawButtonPressed(1));
@@ -96,7 +89,7 @@ public class RobotContainer {
 
     // System.out.println(controller.getPort());
 
-    driveTrain.setDefaultCommand(arcadeDrive2);
+    driveTrain.setDefaultCommand(arcadeDrive);
 
     configureButtonBindings();
   }
@@ -116,8 +109,6 @@ public class RobotContainer {
     // Mapping
     rotateTurret.whenPressed(rtCommand);
     intakeBall.whenHeld(intakeBallCommand);
-
-
   }
 
   /**

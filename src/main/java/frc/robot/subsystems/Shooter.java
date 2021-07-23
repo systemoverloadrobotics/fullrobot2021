@@ -55,10 +55,10 @@ public class Shooter extends SubsystemBase {
         motorSetPoint = speed;
         shooter.set(ControlMode.Velocity, motorSetPoint);
 
-        shooter.set(ControlMode.PercentOutput, motorSetPoint / Constants.UNITS_PER_REVOLUTION);
+        //shooter.set(ControlMode.PercentOutput, motorSetPoint / Constants.UNITS_PER_REVOLUTION);
 
         logger.info("Shooter trying to spin at " + motorSetPoint);
-        SmartDashboard.putNumber("Shooter Motor 1 RPM ", shooter.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("Shooter Motor RPM ", shooter.getSelectedSensorVelocity());
     }
 
     public double getVel() {
@@ -71,7 +71,7 @@ public class Shooter extends SubsystemBase {
         }
     }
 
-    public boolean shooterAtSetpoint() {
+    public boolean atSetpoint() {
         if (shooter.getSelectedSensorVelocity() >= motorSetPoint * (1 - Constants.SHOOTER_DEADBAND)
                 && shooter.getSelectedSensorVelocity() <= motorSetPoint * (1 + Constants.SHOOTER_DEADBAND)) {
             return true;

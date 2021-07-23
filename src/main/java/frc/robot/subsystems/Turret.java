@@ -27,6 +27,7 @@ public class Turret extends SubsystemBase {
 
         // Soft Limit
         turret.configForwardSoftLimitEnable(true, Constants.TURRET_ENCODER_LIMIT);
+        turret.configReverseSoftLimitEnable(true, Constants.TURRET_ENCODER_LIMIT);
 
     }
 
@@ -36,8 +37,8 @@ public class Turret extends SubsystemBase {
      * encoderToAngle(angle)); }
      */
 
-    public void set(double rpm) {
-        turret.set(ControlMode.PercentOutput, rpm);
+    public void set(double percentage) {
+        turret.set(ControlMode.PercentOutput, percentage);
     }
 
     public double getVel() {

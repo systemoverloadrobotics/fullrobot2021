@@ -3,11 +3,11 @@ package frc.robot.commands;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.Storage;
 
-public class StorageID extends CommandBase {
+public class StorageManager extends CommandBase {
 
     private Storage storage;
 
-    public StorageID(Storage storage) {
+    public StorageManager(Storage storage) {
         this.storage = storage;
         addRequirements(storage);
     }
@@ -19,36 +19,28 @@ public class StorageID extends CommandBase {
 
     @Override
     public void execute() {
-
-        storage.setBallCount(0);
-
-        for(int i = 0; i < storage.getAllSensors().length; i++){
-            if(storage.getSensorValue(i)){
-                storage.incBallCount();
-            }
-        }
         
-        if(storage.getSensorValue(0)) {
+        if(storage.getSensor(0).get()) {
             if(storage.getBallCount() == 0){
                 storage.spinLowerMotor();
-                if(storage.getSensorValue(1)){
+                if(storage.getSensor(1).get()){
                     storage.stopLowerMotor();
                 }
                 storage.incBallCount();
             }
     
-            if(storage.getBallCount() == 2 && storage.getSensorValue(1) && storage.getSensorValue(2)){
+            if(storage.getBallCount() == 2 && storage.getSensor(1).get() && storage.getSensor(2).get()){
                 storage.spinBoth();
-                if(storage.getSensorValue(3) && storage.getSensorValue(4)){
+                if(storage.getSensor(3).get() && storage.getSensor(4).get()){
                     storage.stopBoth();
                 }
             }
     
-            if(storage.getBallCount() >= 2 && storage.getSensorValue(3) && storage.getSensorValue(4)){
+            if(storage.getBallCount() >= 2 && storage.getSensor(3).get() && storage.getSensor(4).get()){
                 int i = 0;
-                if(storage.getSensorValue(i)){
+                if(storage.getSensor(i).get()){
                     storage.spinLowerMotor();
-                    if(storage.getSensorValue(i++)){
+                    if(storage.getSensor(i++).get()){
                         storage.stopLowerMotor();
                     }
                 }
