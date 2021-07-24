@@ -19,9 +19,6 @@ import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
 import com.revrobotics.EncoderType;
 import frc.robot.Constants;
 
-import java.io.Console;
-import java.util.function.BooleanSupplier;
-
 public class DriveTrain extends SubsystemBase {
 
     // DriveBase is divided into 2 sections, a right and left section.

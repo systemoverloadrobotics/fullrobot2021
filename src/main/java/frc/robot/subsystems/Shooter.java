@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,7 +18,7 @@ public class Shooter extends SubsystemBase {
     private double motorSetPoint;
     // private int numberOfBallsFired;
 
-    private WPI_TalonSRX shooter = new WPI_TalonSRX(1); // config id later
+    private WPI_TalonSRX shooter = new WPI_TalonSRX(0); // config id later
 
     private boolean subsystemActive = false;
 

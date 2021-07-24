@@ -9,7 +9,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 public class Storage extends SubsystemBase {
     private WPI_VictorSPX lowerMotor = new WPI_VictorSPX(0);// dummy test
-    private WPI_VictorSPX upperMotor = new WPI_VictorSPX(1);
+    private WPI_VictorSPX upperMotor = new WPI_VictorSPX(0);
     private DigitalInput[] sensors = new DigitalInput[5];
     private int ballCount = 0;
 

@@ -3,14 +3,14 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 public class Turret extends SubsystemBase {
 
-    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later
+    private WPI_TalonSRX turret = new WPI_TalonSRX(1); // config id later
 
     public Turret() {
 

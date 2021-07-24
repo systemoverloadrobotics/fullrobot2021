@@ -49,8 +49,8 @@ public class RobotContainer {
 
   // Subsystems
   private final DriveTrain driveTrain = new DriveTrain();
-  private final Turret turret = new Turret();
-  private final Shooter shooter = new Shooter();
+  //private final Turret turret = new Turret();
+  //private final Shooter shooter = new Shooter();
   private final Limelight limelight = new Limelight();
   private final Intake intake = new Intake();
 
@@ -61,10 +61,10 @@ public class RobotContainer {
 
   // Commands
 
-  private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> controller.getAxisType(2),
-      () -> controller.getAxisType(1), () -> controller.getRawButtonReleased(4),
-      () -> controller.getRawButtonPressed(4), () -> controller.getRawButtonReleased(1),
-      () -> controller.getRawButtonPressed(1));
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> controller.getRawAxis(1),
+      () -> controller.getRawAxis(0), () -> controller.getRawButtonPressed(5),
+      () -> controller.getRawButtonReleased(5), () -> controller.getRawButtonPressed(6),
+      () -> controller.getRawButtonReleased(6));
   private final RotateTurret rtCommand = new RotateTurret();
   private final IntakeBall intakeBallCommand = new IntakeBall(intake);
 
