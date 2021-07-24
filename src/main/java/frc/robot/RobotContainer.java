@@ -60,11 +60,11 @@ public class RobotContainer {
   XboxController controller = new XboxController(0);
 
   // Commands
-
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> controller.getRawAxis(1),
       () -> controller.getRawAxis(0), () -> controller.getRawButtonPressed(5),
       () -> controller.getRawButtonReleased(5), () -> controller.getRawButtonPressed(6),
       () -> controller.getRawButtonReleased(6));
+
   private final RotateTurret rtCommand = new RotateTurret();
   private final IntakeBall intakeBallCommand = new IntakeBall(intake);
 
