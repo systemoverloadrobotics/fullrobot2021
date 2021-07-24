@@ -44,13 +44,15 @@ public class RobotContainer {
   private final Shooter shooter = new Shooter();
   private final Limelight limelight = new Limelight();
 
+  // Xbox Controller
+  XboxController controller = new XboxController(0);
+
   // Commands
-  private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> movementJoystick.getY(),
-      () -> movementJoystick.getX(), 
-      () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.TRIGGER),
-      () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.TRIGGER), 
-      () -> movementJoystick.getRawButtonPressed(CONTROLS.JOYSTICK.THUMB), 
-      () -> movementJoystick.getRawButtonReleased(CONTROLS.JOYSTICK.THUMB));
+
+  private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> controller.getRawAxis(1),
+      () -> controller.getRawAxis(0), () -> controller.getRawButtonPressed(5),
+      () -> controller.getRawButtonReleased(5), () -> controller.getRawButtonPressed(6),
+      () -> controller.getRawButtonReleased(6));    
 
   private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 
