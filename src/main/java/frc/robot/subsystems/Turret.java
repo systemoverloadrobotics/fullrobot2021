@@ -5,12 +5,14 @@ import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Turret extends SubsystemBase {
 
     private WPI_TalonSRX turret = new WPI_TalonSRX(1); // config id later
+    private double speed;
 
     public Turret() {
 
@@ -39,6 +41,7 @@ public class Turret extends SubsystemBase {
 
     public void set(double percentage) {
         turret.set(ControlMode.PercentOutput, percentage);
+        speed = percentage;
     }
 
     public double getVel() {
@@ -52,7 +55,7 @@ public class Turret extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-
+        SmartDashboard.putNumber("Turret Motor Point", speed);
     }
 
 }

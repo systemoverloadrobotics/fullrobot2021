@@ -59,14 +59,12 @@ public class RobotContainer {
   // Xbox Controller
   XboxController controller = new XboxController(0);
 
-  // Xbox Controller
-  XboxController controller = new XboxController(0);
-
   // Commands
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> controller.getRawAxis(1),
       () -> controller.getRawAxis(0), () -> controller.getRawButtonPressed(5),
       () -> controller.getRawButtonReleased(5), () -> controller.getRawButtonPressed(6),
       () -> controller.getRawButtonReleased(6));    
+
 
   private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 
@@ -101,6 +99,11 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    
+    //RotateTurret Biniding
+    JoystickButton xButton = new JoystickButton(controller, 3);
+    xButton.whenHeld(new RotateTurret());
+
 
   }
 

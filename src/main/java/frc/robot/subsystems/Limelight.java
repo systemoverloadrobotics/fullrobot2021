@@ -88,6 +88,8 @@ public class Limelight extends SubsystemBase {
         y = verticalAngleOffSet.getDouble(0.0);
         area = ta.getDouble(0.0);
 
+        SmartDashboard.putNumber("Horizontal Error", x);
+
     }
 
 }
