@@ -3,14 +3,16 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
-import frc.robot.RobotContainer;
 
 public class Turret extends SubsystemBase {
 
-    private WPI_TalonSRX turret = new WPI_TalonSRX(2); // config id later
+    private WPI_TalonSRX turret = new WPI_TalonSRX(1); // config id later
+    private double speed;
 
     public Turret() {
 
@@ -27,6 +29,7 @@ public class Turret extends SubsystemBase {
 
         // Soft Limit
         turret.configForwardSoftLimitEnable(true, Constants.TURRET_ENCODER_LIMIT);
+        turret.configReverseSoftLimitEnable(true, Constants.TURRET_ENCODER_LIMIT);
 
     }
 
@@ -35,6 +38,11 @@ public class Turret extends SubsystemBase {
      * public void aim(double angle) { turret.set(ControlMode.Position,
      * encoderToAngle(angle)); }
      */
+
+    public void set(double percentage) {
+        turret.set(ControlMode.PercentOutput, percentage);
+        speed = percentage;
+    }
 
     public double getVel() {
         return turret.getSelectedSensorVelocity();
@@ -47,7 +55,7 @@ public class Turret extends SubsystemBase {
     @Override
     public void periodic() {
         // This method will be called once per scheduler run
-
+        SmartDashboard.putNumber("Turret Motor Point", speed);
     }
 
 }

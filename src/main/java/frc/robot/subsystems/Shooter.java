@@ -6,6 +6,7 @@ import com.ctre.phoenix.motorcontrol.ControlMode;
 import com.ctre.phoenix.motorcontrol.FeedbackDevice;
 import com.ctre.phoenix.motorcontrol.NeutralMode;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
+import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -17,7 +18,7 @@ public class Shooter extends SubsystemBase {
     private double motorSetPoint;
     // private int numberOfBallsFired;
 
-    private WPI_TalonSRX shooter = new WPI_TalonSRX(1); // config id later
+    private WPI_TalonSRX shooter = new WPI_TalonSRX(0); // config id later
 
     private boolean subsystemActive = false;
 
@@ -55,10 +56,10 @@ public class Shooter extends SubsystemBase {
         motorSetPoint = speed;
         shooter.set(ControlMode.Velocity, motorSetPoint);
 
-        shooter.set(ControlMode.PercentOutput, motorSetPoint / Constants.UNITS_PER_REVOLUTION);
+        //shooter.set(ControlMode.PercentOutput, motorSetPoint / Constants.UNITS_PER_REVOLUTION);
 
         logger.info("Shooter trying to spin at " + motorSetPoint);
-        SmartDashboard.putNumber("Shooter Motor 1 RPM ", shooter.getSelectedSensorVelocity());
+        SmartDashboard.putNumber("Shooter Motor RPM ", shooter.getSelectedSensorVelocity());
     }
 
     public double getVel() {
@@ -71,7 +72,7 @@ public class Shooter extends SubsystemBase {
         }
     }
 
-    public boolean shooterAtSetpoint() {
+    public boolean atSetpoint() {
         if (shooter.getSelectedSensorVelocity() >= motorSetPoint * (1 - Constants.SHOOTER_DEADBAND)
                 && shooter.getSelectedSensorVelocity() <= motorSetPoint * (1 + Constants.SHOOTER_DEADBAND)) {
             return true;

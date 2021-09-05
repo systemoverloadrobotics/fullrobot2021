@@ -4,25 +4,34 @@
 
 package frc.robot;
 
+import javax.naming.directory.DirContext;
 import javax.swing.plaf.basic.BasicDirectoryModel;
 
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj.GenericHID.Hand;
+import edu.wpi.first.wpilibj.shuffleboard.Shuffleboard;
+import edu.wpi.first.wpilibj.smartdashboard.Field2d;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import frc.robot.commands.ArcadeDrive;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.ExampleCommand;
+import frc.robot.commands.IntakeBall;
+import frc.robot.commands.RotateTurret;
 import frc.robot.commands.auto.Barrel;
 import frc.robot.commands.auto.Bounce;
 import frc.robot.commands.auto.Slalom;
 import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.subsystems.Intake;
 import frc.robot.subsystems.Limelight;
 import frc.robot.subsystems.Shooter;
 import frc.robot.subsystems.Turret;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.Trigger;
 import frc.robot.Constants.*;
 
 /**
@@ -40,19 +49,22 @@ public class RobotContainer {
 
   // Subsystems
   private final DriveTrain driveTrain = new DriveTrain();
-  private final Turret turret = new Turret();
-  private final Shooter shooter = new Shooter();
+  //private final Turret turret = new Turret();
+  //private final Shooter shooter = new Shooter();
   private final Limelight limelight = new Limelight();
+  private final Intake intake = new Intake();
+
+  private final Field2d field = new Field2d();
 
   // Xbox Controller
   XboxController controller = new XboxController(0);
 
   // Commands
-
   private final ArcadeDrive arcadeDrive = new ArcadeDrive(driveTrain, () -> controller.getRawAxis(1),
       () -> controller.getRawAxis(0), () -> controller.getRawButtonPressed(5),
       () -> controller.getRawButtonReleased(5), () -> controller.getRawButtonPressed(6),
       () -> controller.getRawButtonReleased(6));    
+
 
   private SendableChooser<Command> autoChooser = new SendableChooser<Command>();
 
@@ -66,7 +78,14 @@ public class RobotContainer {
     autoChooser.addOption("Bounce Paths", new Bounce(driveTrain, driveTrain.DRIVE_KINEMATICS));
     autoChooser.addOption("Barrel Racing Path", new Barrel(driveTrain, driveTrain.DRIVE_KINEMATICS));
     autoChooser.addOption("Slalom Path", new Slalom(driveTrain, driveTrain.DRIVE_KINEMATICS));
+
+    // SmartDashboard
     SmartDashboard.putData("Auton Task", autoChooser);
+    SmartDashboard.putData("Field", field);
+    SmartDashboard.putNumber("RightPosition", driveTrain.getRightMasterEncoderValue());
+    SmartDashboard.putNumber("LeftPosition", driveTrain.getLeftMasterEncoderValue());
+
+    // System.out.println(controller.getPort());
 
     driveTrain.setDefaultCommand(arcadeDrive);
 
@@ -80,6 +99,11 @@ public class RobotContainer {
    * passing it to a {@link edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
+    
+    //RotateTurret Biniding
+    JoystickButton xButton = new JoystickButton(controller, 3);
+    xButton.whenHeld(new RotateTurret());
+
 
   }
 
