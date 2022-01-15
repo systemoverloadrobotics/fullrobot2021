@@ -7,10 +7,11 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 public class Intake extends SubsystemBase{
-    private WPI_VictorSPX intakeBar = new WPI_VictorSPX(0);
+    private WPI_VictorSPX intakeBar = new WPI_VictorSPX(Constants.INTAKE_ID);
 
     public Intake(){
-
+        intakeBar.configFactoryDefault();
+        intakeBar.configPeakOutputForward(-0.75);
     }
 
 
@@ -21,5 +22,9 @@ public class Intake extends SubsystemBase{
 
     public void spinOutBar(){
         intakeBar.set(ControlMode.PercentOutput, Constants.INTAKE_SPEED_OUT);
+    }
+
+    public void stop(){
+        intakeBar.set(ControlMode.PercentOutput,0);
     }
 }

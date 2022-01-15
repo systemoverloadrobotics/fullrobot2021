@@ -17,15 +17,17 @@ public class Shooter extends SubsystemBase {
     private double motorSetPoint;
     // private int numberOfBallsFired;
 
-    private WPI_TalonSRX shooter = new WPI_TalonSRX(1); // config id later
+    private WPI_TalonSRX shooter = new WPI_TalonSRX(7); // config id later
+    private WPI_TalonSRX shooterOne = new WPI_TalonSRX(2);
 
     private boolean subsystemActive = false;
 
     public Shooter() {
         // configuration of the motors
         shooter.configFactoryDefault();
-
+        shooterOne.configFactoryDefault();
         // Coast
+        shooter.setNeutralMode(NeutralMode.Coast);
         shooter.setNeutralMode(NeutralMode.Coast);
 
         /* Config sensor used for Primary PID [Velocity] */
@@ -35,10 +37,10 @@ public class Shooter extends SubsystemBase {
         /* Config the peak and nominal outputs */
         shooter.configNominalOutputForward(0, Constants.TIMEOUT_MS);
         shooter.configNominalOutputReverse(0, Constants.TIMEOUT_MS);
-        shooter.configPeakOutputForward(1, Constants.TIMEOUT_MS);
-        shooter.configPeakOutputReverse(-1, Constants.TIMEOUT_MS);
+        shooter.configPeakOutputReverse(-0.9, Constants.TIMEOUT_MS);
 
         shooter.configOpenloopRamp(0.4);
+        //shooterOne.configOpenloopRamp(0.4);
 
         subsystemActive = true;
     }
@@ -51,18 +53,17 @@ public class Shooter extends SubsystemBase {
         return velocity; // in m/s
     }
 
-    public void spin(double speed) {
-        motorSetPoint = speed;
-        shooter.set(ControlMode.Velocity, motorSetPoint);
+    public void spin(double percent) {
+        motorSetPoint = percent;
+        shooter.set(ControlMode.PercentOutput, motorSetPoint);
+        shooterOne.set(ControlMode.PercentOutput, -motorSetPoint);
 
-        shooter.set(ControlMode.PercentOutput, motorSetPoint / Constants.UNITS_PER_REVOLUTION);
-
-        logger.info("Shooter trying to spin at " + motorSetPoint);
-        SmartDashboard.putNumber("Shooter Motor 1 RPM ", shooter.getSelectedSensorVelocity());
+        //shooter.set(ControlMode.PercentOutput, motorSetPoint / Constants.UNITS_PER_REVOLUTION);
+        SmartDashboard.putNumber("Shooter Motor RPM ", shooter.getSelectedSensorVelocity());
     }
 
-    public double getVel() {
-        return shooter.getSelectedSensorVelocity();
+    public double getOutput() {
+        return shooter.getMotorOutputPercent();
     }
 
     public void set(double rpm) {
@@ -71,9 +72,9 @@ public class Shooter extends SubsystemBase {
         }
     }
 
-    public boolean shooterAtSetpoint() {
-        if (shooter.getSelectedSensorVelocity() >= motorSetPoint * (1 - Constants.SHOOTER_DEADBAND)
-                && shooter.getSelectedSensorVelocity() <= motorSetPoint * (1 + Constants.SHOOTER_DEADBAND)) {
+    public boolean atSetpoint() {
+        if (shooter.getMotorOutputPercent() >= motorSetPoint * (1 - Constants.SHOOTER_DEADBAND)
+                && shooter.getMotorOutputPercent() <= motorSetPoint * (1 + Constants.SHOOTER_DEADBAND)) {
             return true;
         }
         return false;
@@ -81,10 +82,17 @@ public class Shooter extends SubsystemBase {
 
     public void stop() {
         shooter.stopMotor();
+        shooterOne.stopMotor();
     }
 
     public boolean isActive() {
         return this.subsystemActive;
     }
+
+    @Override
+    public void periodic(){
+        SmartDashboard.putNumber("Shooter Output", getOutput());
+    }
+
 
 }

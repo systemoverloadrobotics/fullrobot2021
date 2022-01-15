@@ -39,9 +39,9 @@ public final class Constants {
     // Gains
     public static final int TALON_PRIMARY_CLOSED_LOOP = 0;
 
-    // Turret Constants
+    // Turret Constants                                     -
     public static final int TURRET_ENCODER_LIMIT = 85; // degree of freedom, if not met seeking will be required
-
+    public static final double TURRT_ROTATION_SPEED = 0.15; // percentage of output for turret
     public static final int TURRET_PID_SLOT = 0;
 
     public static final double P_TURRET = 0.1;
@@ -65,9 +65,11 @@ public final class Constants {
     public static final int PIGEON_PORT = 0;
 
     // DriveTrain and Driver Controller Constants
+
     //Intake Constants
-    public static final double INTAKE_SPEED_IN = 0.5;
-    public static final double INTAKE_SPEED_OUT = -0.2;
+    public static final double INTAKE_SPEED_IN = -0.4;
+    public static final double INTAKE_SPEED_OUT = 0.4;
+    public static final int INTAKE_ID = 15;
 
     //Storage Constants
     public static final double STORAGE_SPIN = 0.5;

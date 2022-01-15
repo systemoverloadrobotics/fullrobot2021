@@ -4,6 +4,9 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants.DRIVE;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
+
+import javax.annotation.OverridingMethodsMustInvokeSuper;
+
 import com.ctre.phoenix.sensors.PigeonIMU;
 import com.revrobotics.CANEncoder;
 import edu.wpi.first.wpilibj.DoubleSolenoid;
@@ -15,6 +18,7 @@ import edu.wpi.first.wpilibj.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveKinematics;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveOdometry;
 import edu.wpi.first.wpilibj.kinematics.DifferentialDriveWheelSpeeds;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import com.revrobotics.EncoderType;
 import frc.robot.Constants;
@@ -32,6 +36,11 @@ public class DriveTrain extends SubsystemBase {
     private CANSparkMax leftFollower1 = new CANSparkMax(DRIVE.LEFT_FOLLOWER_1_ID, MotorType.kBrushless);
     private CANSparkMax leftFollower2 = new CANSparkMax(DRIVE.LEFT_FOLLOWER_2_ID, MotorType.kBrushless);
 
+    private CANEncoder rightFolloer1Encoder;
+    private CANEncoder rightFollower2Encoder;
+    private CANEncoder leftFollower1Encoder;
+    private CANEncoder leftFOllower2Encoder;
+
     private CANEncoder leftMasterEncoder = leftMaster.getEncoder(EncoderType.kQuadrature, 4069);
 
     private CANEncoder rightMasterEncoder = rightMaster.getEncoder(EncoderType.kQuadrature, 4069);
@@ -46,19 +55,20 @@ public class DriveTrain extends SubsystemBase {
     private double yaw;
     private double pitch;
     private double roll;
-    private PigeonIMU pidgey = new PigeonIMU(Constants.PIGEON_PORT);
+    //private PigeonIMU pidgey = new PigeonIMU(Constants.PIGEON_PORT);
 
     private DifferentialDriveOdometry odometry;
 
     public DifferentialDriveKinematics DRIVE_KINEMATICS = new DifferentialDriveKinematics(Constants.TRACK_WIDTH_METERS);
 
     public DriveTrain() {
-        rightMaster.restoreFactoryDefaults();
-        rightFollower1.restoreFactoryDefaults();
-        rightFollower2.restoreFactoryDefaults();
-        leftMaster.restoreFactoryDefaults();
-        leftFollower1.restoreFactoryDefaults();
-        leftFollower2.restoreFactoryDefaults();
+
+        rightFolloer1Encoder = rightFollower1.getEncoder();
+        rightFollower2Encoder = rightFollower2.getEncoder();
+        leftFollower1Encoder = leftFollower1.getEncoder();
+        leftFOllower2Encoder = leftFollower2.getEncoder();
+
+
 
         odometry = new DifferentialDriveOdometry(getRotation());
 
@@ -68,10 +78,14 @@ public class DriveTrain extends SubsystemBase {
     public void periodic() {
         double[] ypr = new double[3];
         odometry.update(getRotation(), leftMasterEncoder.getPosition(), rightMasterEncoder.getPosition());
-        pidgey.getYawPitchRoll(ypr);
+        //pidgey.getYawPitchRoll(ypr);
         yaw = ypr[0];
         pitch = ypr[1];
         roll = ypr[2];
+        SmartDashboard.putNumber("Voltagee Output", getLeftMasterEncoderValue());
+        SmartDashboard.putNumber("ID 7 drive", leftFollower1.getAppliedOutput());
+        SmartDashboard.putNumber("ID 6 drive", leftFollower2.getAppliedOutput());
+        SmartDashboard.putNumber("ID 4 Drive", rightFollower1.getAppliedOutput());
 
     }
 
@@ -117,7 +131,7 @@ public class DriveTrain extends SubsystemBase {
         shifter.set(Value.kReverse);
     }
 
-    // Gets the encoder value for the left encoder
+    // Gets the encoder value for thre left encoder
     public double getLeftMasterEncoderValue() {
         return leftMasterEncoder.getPosition();
     }
@@ -126,5 +140,6 @@ public class DriveTrain extends SubsystemBase {
     public double getRightMasterEncoderValue() {
         return rightMasterEncoder.getPosition();
     }
+
 
 }
